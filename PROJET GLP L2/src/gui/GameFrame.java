@@ -66,7 +66,6 @@ public class GameFrame {
 		frame.setTitle("Farm Simulator");
 		frame.setSize(1200, 600);
 		frame.setLocation(50, 50);
-//		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		
@@ -265,8 +264,8 @@ public class GameFrame {
 		optB.setBorder(null);
 		return optB;
 	}
-	
-public class OpenGarageAction implements ActionListener {
+
+	public class OpenGarageAction implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
 			GameFrame.this.garagrInfo = new GarageInfo();
@@ -342,7 +341,6 @@ public class OpenGarageAction implements ActionListener {
 	}
 	
 	public class MoreTimeAction implements ActionListener {
-		
 		private TimePanel infoTime;
 		
 		public MoreTimeAction(TimePanel infoTime) {
@@ -355,7 +353,6 @@ public class OpenGarageAction implements ActionListener {
 	}
 	
 	public class StopTimeAction implements ActionListener {
-		
 		private TimePanel infoTime;
 		
 		public StopTimeAction(TimePanel infoTime) {
@@ -367,56 +364,54 @@ public class OpenGarageAction implements ActionListener {
 		}
 	}
 	
-public class LessTimeAction implements ActionListener {
+	public class LessTimeAction implements ActionListener {
+		private TimePanel infoTime;
+	
+		public LessTimeAction(TimePanel infoTime) {
+			this.infoTime = infoTime;
+		}
 		
-	private TimePanel infoTime;
-	
-	public LessTimeAction(TimePanel infoTime) {
-		this.infoTime = infoTime;
+		public void actionPerformed(ActionEvent e) {
+			infoTime.setSpeed(400);
+		}
 	}
 	
-	public void actionPerformed(ActionEvent e) {
-		infoTime.setSpeed(400);
-	}
-}
+	public class WindowAdapter implements WindowListener {
 	
-public class WindowAdapter implements WindowListener {
+		@Override
+		public void windowClosing(WindowEvent e) {
+			int reponse = JOptionPane.showConfirmDialog(frame,
+			            "Voulez-vous quitter l'application",
+			            "Confirmation",
+			            JOptionPane.YES_NO_OPTION,
+			            JOptionPane.QUESTION_MESSAGE);
+			if (reponse==JOptionPane.YES_OPTION){
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			}	
+		}
 	
-	@Override
-	public void windowClosing(WindowEvent e) {
-		int reponse = JOptionPane.showConfirmDialog(frame,
-		            "Voulez-vous quitter l'application",
-		            "Confirmation",
-		            JOptionPane.YES_NO_OPTION,
-		            JOptionPane.QUESTION_MESSAGE);
-		if (reponse==JOptionPane.YES_OPTION){
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		}	
-	}
-
-	@Override
-	public void windowActivated(WindowEvent e) {
-	}
-
-	@Override
-	public void windowClosed(WindowEvent e) {
-	}
-
-	@Override
-	public void windowDeactivated(WindowEvent e) {
-	}
-
-	@Override
-	public void windowDeiconified(WindowEvent e) {
-	}
-
-	@Override
-	public void windowIconified(WindowEvent e) {
-	}
-
-	@Override
-	public void windowOpened(WindowEvent e) {
-	}
-}
+		@Override
+		public void windowActivated(WindowEvent e) {
+		}
 	
+		@Override
+		public void windowClosed(WindowEvent e) {
+		}
+	
+		@Override
+		public void windowDeactivated(WindowEvent e) {
+		}
+	
+		@Override
+		public void windowDeiconified(WindowEvent e) {
+		}
+	
+		@Override
+		public void windowIconified(WindowEvent e) {
+		}
+	
+		@Override
+		public void windowOpened(WindowEvent e) {
+		}
+	}
 }
