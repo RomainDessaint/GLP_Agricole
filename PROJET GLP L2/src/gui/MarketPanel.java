@@ -16,7 +16,7 @@ public class MarketPanel{
 	
 	private JButton btnLess = new JButton("-");
 	private JButton btnPlus = new JButton("+");
-	private JButton btnBuy = new JButton("Vendre");
+	private JButton btnSell = new JButton("Vendre");
 	private JLabel articleIcon;
 	private JLabel articleName ;
 	private JLabel articlePrice;
@@ -29,7 +29,7 @@ public class MarketPanel{
 	
 	private int quantity;
 
-	public MarketPanel(String name, Dimension iconDimension, int price) {
+	public MarketPanel(String name, Dimension iconDimension, int price, String gender) {
 		this.imageArticle = new ImageIcon(new ImageIcon("src\\images\\"+name+".png").getImage().getScaledInstance(22, 22, Image.SCALE_DEFAULT));
 		this.articleIcon = new JLabel(imageArticle);
 		this.articleName = new JLabel(name);
@@ -46,10 +46,12 @@ public class MarketPanel{
 		panel.add(btnLess);
 		panel.add(articleQuantity);
 		panel.add(btnPlus);
-		panel.add(btnBuy);
+		panel.add(btnSell);
 		
 		btnLess.addActionListener(new LessAction(articleQuantity));
 		btnPlus.addActionListener(new PlusAction(articleQuantity));
+		btnSell.addActionListener( new SellAction(this, price));
+		
 	}
 	
 	public String getGender() {
@@ -80,10 +82,10 @@ public class MarketPanel{
 		this.btnPlus = btnPlus;
 	}
 	public JButton getBtnBuy() {
-		return btnBuy;
+		return btnSell;
 	}
 	public void setBtnBuy(JButton btnBuy) {
-		this.btnBuy = btnBuy;
+		this.btnSell = btnBuy;
 	}
 	
 	public class LessAction implements ActionListener {
@@ -153,11 +155,15 @@ public class MarketPanel{
 				MoneyPanel.updateValue();
 				JOptionPane jop2 = new JOptionPane();
 			    ImageIcon img = new ImageIcon("src\\images\\Ok.png");
-			    if (marketPanel.getQuantity() == 1)
+			    if (marketPanel.getQuantity() == 1 || marketPanel.getName() == "Enclos")
 			    	jop2.showMessageDialog(null,marketPanel.getQuantity()+" " +marketPanel.getName() +" " +"vendu"+gender+" avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 			    else {
-			    	jop2.showMessageDialog(null,marketPanel.getQuantity()+" " +marketPanel.getName() +"s " +"vendu"+gender+"s avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
-			    }
+			    	if (marketPanel.getName() == "Enclos")
+			    		jop2.showMessageDialog(null,marketPanel.getQuantity()+" " +marketPanel.getName() +"s " +"vendu"+gender+"s avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+			    	else {
+				    	jop2.showMessageDialog(null,marketPanel.getQuantity()+" " +marketPanel.getName() +"s " +"vendu"+gender+"s avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+				    }
+			    }	
 			}
 		}
 	}

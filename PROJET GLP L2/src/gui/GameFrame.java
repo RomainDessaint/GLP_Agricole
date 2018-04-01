@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -57,7 +59,6 @@ public class GameFrame {
 		frame.setTitle("Farm Simulator");
 		frame.setSize(1200, 600);
 		frame.setLocation(50, 50);
-//		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		
@@ -188,6 +189,8 @@ public class GameFrame {
 		btnSilo.addActionListener(new OpenSiloAction());
 		btnGarage.addActionListener(new OpenGarageAction());
 		
+		frame.addWindowListener(new WindowAdapter());
+		
 		frame.setContentPane(pnlMain);
 		frame.setVisible(true);
 	}
@@ -288,6 +291,45 @@ public class OpenGarageAction implements ActionListener {
 			pnlCenter.setDividerLocation(1000);
 			btnSpoilOpt.setVisible(false);
 			btnHideOpt.setVisible(true);
+		}
+	}
+	
+public class WindowAdapter implements WindowListener {
+		
+		@Override
+		public void windowClosing(WindowEvent e) {
+			int reponse = JOptionPane.showConfirmDialog(frame,
+			            "Voulez-vous quitter l'application",
+			            "Confirmation",
+			            JOptionPane.YES_NO_OPTION,
+			            JOptionPane.QUESTION_MESSAGE);
+			if (reponse==JOptionPane.YES_OPTION){
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			}	
+		}
+
+		@Override
+		public void windowActivated(WindowEvent e) {
+		}
+
+		@Override
+		public void windowClosed(WindowEvent e) {
+		}
+
+		@Override
+		public void windowDeactivated(WindowEvent e) {
+		}
+
+		@Override
+		public void windowDeiconified(WindowEvent e) {
+		}
+
+		@Override
+		public void windowIconified(WindowEvent e) {
+		}
+
+		@Override
+		public void windowOpened(WindowEvent e) {
 		}
 	}
 }
