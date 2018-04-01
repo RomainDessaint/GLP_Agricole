@@ -9,13 +9,21 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import datas.DataObjects;
+import gui.ShopPanel.AnimalInfoAction;
 import types.Animal;
 
 public class AnimalInfo {
 	private JFrame frame = new JFrame();
 	private Animal animal;
-	public AnimalInfo(Animal animal) {
+	private int indecFence;
+	private int indexCellule;
+	public AnimalInfo(Animal animal, int indexFence, int indexCellule) {
+		
 		this.animal = animal;
+		this.indecFence = indexFence;
+		this.indexCellule = indexCellule;
+		
 		frame.setName(animal.getName());
 		frame.setSize(300, 80);
 		frame.setResizable(false);
@@ -34,7 +42,8 @@ public class AnimalInfo {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				DataObjects.FenceMap.get(indexFence).get(indexCellule).setIcon(null);
+				frame.setVisible(false);
 				
 			}
 		});

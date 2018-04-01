@@ -115,7 +115,7 @@ public class ShopPanel {
 					else if(indexCellule<=8) {
 						animals.put(name+animals.size(), switchAnimal(name));						
 						DataObjects.FenceMap.get(indexFence).get(indexCellule).setIcon(new ImageIcon("src\\images\\"+Name+".png"));
-						DataObjects.FenceMap.get(indexFence).get(indexCellule).addActionListener(new AnimalInfoAction(animals.get((name+(animals.size()-1)))));
+						DataObjects.FenceMap.get(indexFence).get(indexCellule).addActionListener(new AnimalInfoAction(animals.get((name+(animals.size()-1))), indexFence, indexCellule));
 
 						break;
 					}	
@@ -140,13 +140,17 @@ public class ShopPanel {
 		}
 	}
 	public class AnimalInfoAction implements ActionListener{
-		Animal animal;
-		public AnimalInfoAction(Animal animal) {
+		private Animal animal;
+		private int indexFence;
+		private int indexCellule;
+		public AnimalInfoAction(Animal animal, int indexFence, int indexCellule) {
 			this.animal = animal;
+			this.indexFence = indexFence;
+			this.indexCellule = indexCellule;
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			animalInfo(animal);
+			animalInfo(animal, indexFence, indexCellule);
 		}
 	}
 	
@@ -169,8 +173,8 @@ public class ShopPanel {
 	public String getGender() {
 		return gender;
 	}
-	public void animalInfo(Animal animal) {
-		new AnimalInfo(animal);
+	public void animalInfo(Animal animal, int indexFence, int indexCellule) {
+		new AnimalInfo(animal, indexFence, indexCellule);
 	}
 	public boolean isCelluleEmpty( int indexFence, int indexCellule) {
 		return (DataObjects.FenceMap.get(indexFence).get(indexCellule).getIcon()!= null);
