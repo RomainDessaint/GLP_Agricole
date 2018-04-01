@@ -50,7 +50,7 @@ public class MarketPanel{
 		
 		btnLess.addActionListener(new LessAction(articleQuantity));
 		btnPlus.addActionListener(new PlusAction(articleQuantity));
-		btnSell.addActionListener( new SellAction(this, price));
+		btnSell.addActionListener( new SellAction(this, articleQuantity, price));
 	}
 	
 	public String getGender() {
@@ -129,8 +129,10 @@ public class MarketPanel{
 		int money;
 		int price;
 		JLabel articleQuantity;
+		int quantity = 0;
 		
-		public SellAction(MarketPanel marketPanel, int price) {
+		public SellAction(MarketPanel marketPanel,JLabel articleQuantity, int price) {
+			this.articleQuantity = articleQuantity;
 			this.marketPanel = marketPanel;
 			this.money = GameFrame.game.getMoney();
 			this.price = price;
@@ -163,7 +165,9 @@ public class MarketPanel{
 				    	jop2.showMessageDialog(null,marketPanel.getQuantity()+" " +marketPanel.getName() +"s " +"vendu"+gender+"s avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 				    }
 			    }	
+			    marketPanel.setQuantity(0);
 			}
+			articleQuantity.setText(" "+Integer.toString(quantity)+" ");
 		}
 	}
 

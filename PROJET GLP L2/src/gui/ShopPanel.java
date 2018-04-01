@@ -63,7 +63,7 @@ public class ShopPanel {
 		
 		btnLess.addActionListener(new LessAction(this, articleQuantity));
 		btnPlus.addActionListener(new PlusAction(this, articleQuantity));
-		btnBuy.addActionListener(new BuyAction(this, price));
+		btnBuy.addActionListener(new BuyAction(this, articleQuantity, price));
 		
 		if (action == "animal") {
 			btnBuy.addActionListener(new ActionListener() {
@@ -247,8 +247,9 @@ public class ShopPanel {
 		ShopPanel shopPanel;
 		int money;
 		int price;
+		int quantity = 0;
 		
-		public BuyAction(ShopPanel shopPanel, int price) {
+		public BuyAction(ShopPanel shopPanel, JLabel articleQuantity, int price) {
 			this.shopPanel = shopPanel;
 			this.money = GameFrame.game.getMoney();
 			this.price = price;
@@ -288,6 +289,7 @@ public class ShopPanel {
 			    ImageIcon img = new ImageIcon("src\\images\\attention.png");
 			    jop2.showMessageDialog(null, "Argent insuffisant", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 			}
+			articleQuantity.setText(" "+Integer.toString(quantity)+" ");
 		}
 	}
 	
