@@ -38,7 +38,7 @@ public class SiloInfo {
 		int i = 1;
 		int total = 0;
 		
-		for (Map.Entry<String, Integer> e : DataObjects.vedgetables.entrySet()) {
+		for (Map.Entry<String, Integer> e : DataObjects.vedgetablesSilo.entrySet()) {
 			JLabel cellule = new JLabel();
 			JLabel text = new JLabel(e.getKey()+": "+e.getValue()+" Kg");
 			ImageIcon img = new ImageIcon(new ImageIcon("src\\images\\"+e.getKey()+".png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));

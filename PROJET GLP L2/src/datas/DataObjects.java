@@ -8,8 +8,16 @@ import javax.swing.JPanel;
 import types.Animal;
 
 public class DataObjects {
+	public static int MaxKgHouseVegds = 100;
+	public static int MaxKgHouseMeat = 100;
+	
+	public static int CurrentKgHouseVedgs = 0;
+	public static int CurrentKgHouseMeat = 0;
 
 	public static HashMap<String, Integer> vedgetables = new HashMap<>();
+	public static HashMap<String, Integer> vedgetablesHouse = new HashMap<>();
+	public static HashMap<String, Integer> vedgetablesSilo = new HashMap<>();
+	
 	public static HashMap<String, Integer> infrastructures = new HashMap<>();
 	public static HashMap<String, Integer> animals = new HashMap<>();
 	
@@ -31,5 +39,11 @@ public class DataObjects {
 	
 	private DataObjects() {
 		
+	}
+	public static void addMeatKg(int quantity) {
+		CurrentKgHouseMeat += quantity;
+	}
+	public static void addVedgsKg(int quantity) {
+		CurrentKgHouseVedgs += quantity;
 	}
 }

@@ -83,11 +83,26 @@ public class ShopPanel {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if (!DataObjects.vedgetables.containsKey(name)) {
-						DataObjects.vedgetables.put(name, 1);
+						
+						if (DataObjects.CurrentKgHouseVedgs<DataObjects.MaxKgHouseVegds) {
+							DataObjects.vedgetables.put(name, 1);
+							DataObjects.vedgetablesHouse.put(name, 1);
+						}
+						else {
+							DataObjects.vedgetables.put(name, 1);
+							DataObjects.vedgetablesSilo.put(name, 1);
+						}
 					}
 					else {
-
-						DataObjects.vedgetables.put(name, DataObjects.vedgetables.get(name)+1);
+						if(DataObjects.CurrentKgHouseVedgs<DataObjects.MaxKgHouseVegds) {
+							DataObjects.vedgetables.put(name, DataObjects.vedgetables.get(name)+1);
+							DataObjects.vedgetablesHouse.put(name, DataObjects.vedgetablesHouse.get(name)+1);
+						}
+						else {
+							DataObjects.vedgetables.put(name, DataObjects.vedgetables.get(name)+1);
+							DataObjects.vedgetablesSilo.put(name, DataObjects.vedgetablesSilo.get(name)+1);
+						}
+						
 					}
 					
 				}
