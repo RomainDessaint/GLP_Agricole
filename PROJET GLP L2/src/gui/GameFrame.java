@@ -1,12 +1,13 @@
 package gui;
 
 import java.awt.Color;
-
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,6 +25,14 @@ public class GameFrame {
 	private JPanel pnlDb = new JPanel();
 	private JPanel pnlOpt = new JPanel();
 	private JPanel pnlInfo = new JPanel();
+	private JPanel pnlOptS1 = new JPanel();
+	private JPanel pnlOptS2 = new JPanel();
+	private JPanel pnlOptS3 = new JPanel();
+	private JPanel pnlOptS4 = new JPanel();
+	
+	TimePanel infoTime;
+	MoneyPanel infoMoney;
+	EventPanel infoEvent;
 	
 	private JFrame frame = new JFrame();
 	
@@ -39,6 +48,9 @@ public class GameFrame {
 	private JButton btnShop;
 	private JButton btnMarket;
 	private JButton btntypeDay;
+	private JButton btnTimeMore;
+	private JButton btnTimeStop;
+	private JButton btnTimeLess;
 	
 	private ImageIcon iiFlecheD;
 	private ImageIcon iiFlecheG;
@@ -48,16 +60,12 @@ public class GameFrame {
 	
 	private FarmInitializer farmInitializer;
 	
-	
-
 	static Game game;
-
 	
 	public GameFrame(Game game) {
 		frame.setTitle("Farm Simulator");
 		frame.setSize(1200, 600);
 		frame.setLocation(50, 50);
-//		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		
@@ -72,7 +80,13 @@ public class GameFrame {
 		pnlInfo.setBackground(Color.BLACK);
 		pnlInfo.setOpaque(true);
 		pnlInfo.setLayout(null);
-		pnlInfo = PanelInfo.initPnlInfo(pnlInfo);
+		
+		infoTime = new TimePanel();
+		infoMoney = new MoneyPanel();
+		infoEvent = new EventPanel();
+		
+		pnlInfo = PanelInfo.initPnlInfo(pnlInfo, infoTime, infoMoney, infoEvent);
+		
 		pnlInfo.setBackground(Color.gray);
         pnlMain.setRightComponent(pnlInfo);
         
@@ -83,7 +97,6 @@ public class GameFrame {
         
         //PANEL DASHBOARD
 		pnlDb.setLayout(null);
-		
 		
 		farmInitializer = new FarmInitializer(pnlDb, frame.getWidth(), frame.getHeight());
 		farmInitializer.InsertFence();
@@ -141,11 +154,8 @@ public class GameFrame {
 		DataObjects.FieldMap.get(4).get(0).setIcon(new ImageIcon("src\\images\\Tournesol.png"));
 		DataObjects.FieldMap.get(4).get(0).setIcon(new ImageIcon("src\\images\\Carotte.png"));
 		
-		
-		
 		btnHouse = initButton("src\\images\\house.png", pnlDb);
 		btnHouse.setBounds(10, 50, new ImageIcon("src\\images\\house.png").getIconWidth(), new ImageIcon("src\\images\\house.png").getIconHeight());
-		
 		
 		JButton btnReserve = initButton("src\\images\\reserve.png", pnlDb);
 		btnReserve.setBounds(new ImageIcon("src\\images\\house.png").getIconWidth()+30, 10, new ImageIcon("src\\images\\reserve.png").getIconWidth(), new ImageIcon("src\\images\\reserve.png").getIconHeight());
@@ -171,11 +181,39 @@ public class GameFrame {
 		pnlCenter.setLeftComponent(pnlDb);
 
 		//PANEL OPTION
+		pnlOpt.setLayout(new GridLayout(4, 1));
 		pnlOpt.setBackground(Color.gray);
+		
+		//PANEL OPTION ETAGE 1
+		pnlOptS1 = new JPanel();
+		pnlOptS1.setBackground(Color.gray);
+		pnlOptS2.setLayout(new GridLayout(1,2));
 		btnShop = new JButton("Shop");
-		pnlOpt.add(btnShop);
 		btnMarket = new JButton("Market");
-		pnlOpt.add(btnMarket);
+		pnlOptS1.add(btnShop);
+		pnlOptS1.add(btnMarket);
+		pnlOpt.add(pnlOptS1);
+		
+		//PANEL OPTION ETAGE 2
+		pnlOptS2 = new JPanel();
+		pnlOptS2.setBackground(Color.gray);
+		pnlOpt.add(pnlOptS2);
+		
+		//PANEL OPTION ETAGE 3
+		pnlOptS3 = new JPanel();
+		pnlOptS3.setBackground(Color.gray);
+		pnlOpt.add(pnlOptS3);
+		
+		//PANEL OPTION ETAGE 4
+		pnlOptS4 = new JPanel();
+		pnlOptS4.setBackground(Color.gray);
+		pnlOptS4.setLayout(new GridLayout(1, 3));
+		btnTimeLess = initButton("src\\images\\less.png", pnlOptS4);
+		btnTimeStop = initButton("src\\images\\pause.png", pnlOptS4);
+		btnTimeMore = initButton("src\\images\\plus.png", pnlOptS4);
+		pnlOpt.add(pnlOptS4);
+		
+		//AJOUT DU PANEL OPTION AU PANEL CENTER
 		pnlCenter.setRightComponent(pnlOpt);
 		
 		//AJOUT DES ACTION LISTENER
@@ -183,21 +221,31 @@ public class GameFrame {
         btnMarket.addActionListener(new OpenMarketAction());
 		btnSpoilOpt.addActionListener(new SpoilOptAction(btnSpoilOpt, btnHideOpt));
 		btnHideOpt.addActionListener(new HideOptAction(btnSpoilOpt, btnHideOpt));
+		btnTimeLess.addActionListener(new LessTimeAction(getInfoTime()));
+		btnTimeStop.addActionListener(new StopTimeAction(getInfoTime()));
+		btnTimeMore.addActionListener(new MoreTimeAction(getInfoTime()));
 		
 		btnHouse.addActionListener(new OpenHouseAction());
 		btnSilo.addActionListener(new OpenSiloAction());
 		btnGarage.addActionListener(new OpenGarageAction());
 		
+		frame.addWindowListener(new WindowAdapter());
+		
 		frame.setContentPane(pnlMain);
 		frame.setVisible(true);
 	}
+	
 	public FarmInitializer getFarmInitializer() {
 		return farmInitializer;
 	}
+	
 	public void setFarmInitializer(FarmInitializer farmInitializer) {
 		this.farmInitializer = farmInitializer;
 	}
 	
+	public TimePanel getInfoTime() {
+		return infoTime;
+	}
 
 	public JSplitPane initSplitPanel(int dividerSize, int dividerLocation) {
 		JSplitPane jsp = new JSplitPane();
@@ -216,8 +264,8 @@ public class GameFrame {
 		optB.setBorder(null);
 		return optB;
 	}
-	
-public class OpenGarageAction implements ActionListener {
+
+	public class OpenGarageAction implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
 			GameFrame.this.garagrInfo = new GarageInfo();
@@ -236,6 +284,7 @@ public class OpenGarageAction implements ActionListener {
 			new ShopFrame();
 		}
 	}
+	
 	public class OpenHouseAction implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
@@ -288,6 +337,81 @@ public class OpenGarageAction implements ActionListener {
 			pnlCenter.setDividerLocation(1000);
 			btnSpoilOpt.setVisible(false);
 			btnHideOpt.setVisible(true);
+		}
+	}
+	
+	public class MoreTimeAction implements ActionListener {
+		private TimePanel infoTime;
+		
+		public MoreTimeAction(TimePanel infoTime) {
+			this.infoTime = infoTime;
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			infoTime.setSpeed(2);
+		}
+	}
+	
+	public class StopTimeAction implements ActionListener {
+		private TimePanel infoTime;
+		
+		public StopTimeAction(TimePanel infoTime) {
+			this.infoTime = infoTime;
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			this.infoTime.setSpeed(999999999);
+		}
+	}
+	
+	public class LessTimeAction implements ActionListener {
+		private TimePanel infoTime;
+	
+		public LessTimeAction(TimePanel infoTime) {
+			this.infoTime = infoTime;
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			infoTime.setSpeed(400);
+		}
+	}
+	
+	public class WindowAdapter implements WindowListener {
+	
+		@Override
+		public void windowClosing(WindowEvent e) {
+			int reponse = JOptionPane.showConfirmDialog(frame,
+			            "Voulez-vous quitter l'application",
+			            "Confirmation",
+			            JOptionPane.YES_NO_OPTION,
+			            JOptionPane.QUESTION_MESSAGE);
+			if (reponse==JOptionPane.YES_OPTION){
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			}	
+		}
+	
+		@Override
+		public void windowActivated(WindowEvent e) {
+		}
+	
+		@Override
+		public void windowClosed(WindowEvent e) {
+		}
+	
+		@Override
+		public void windowDeactivated(WindowEvent e) {
+		}
+	
+		@Override
+		public void windowDeiconified(WindowEvent e) {
+		}
+	
+		@Override
+		public void windowIconified(WindowEvent e) {
+		}
+	
+		@Override
+		public void windowOpened(WindowEvent e) {
 		}
 	}
 }

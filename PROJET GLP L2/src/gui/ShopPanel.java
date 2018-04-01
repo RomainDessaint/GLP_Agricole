@@ -87,20 +87,35 @@ public class ShopPanel {
 						if (DataObjects.CurrentKgHouseVedgs<DataObjects.MaxKgHouseVegds) {
 							DataObjects.vedgetables.put(name, 1);
 							DataObjects.vedgetablesHouse.put(name, 1);
+							for (int i=1; i<getQuantity();i++) {
+								DataObjects.vedgetables.put(name, DataObjects.vedgetables.get(name)+1);
+								DataObjects.vedgetablesHouse.put(name, DataObjects.vedgetablesHouse.get(name)+1);
+							}
 						}
 						else {
 							DataObjects.vedgetables.put(name, 1);
 							DataObjects.vedgetablesSilo.put(name, 1);
+							for (int i=1;i<getQuantity();i++) {
+								DataObjects.vedgetables.put(name, DataObjects.vedgetables.get(name)+1);
+								DataObjects.vedgetablesSilo.put(name, DataObjects.vedgetablesSilo.get(name)+1);
+							}
 						}
 					}
 					else {
 						if(DataObjects.CurrentKgHouseVedgs<DataObjects.MaxKgHouseVegds) {
-							DataObjects.vedgetables.put(name, DataObjects.vedgetables.get(name)+1);
-							DataObjects.vedgetablesHouse.put(name, DataObjects.vedgetablesHouse.get(name)+1);
+							for (int i=0; i<getQuantity();i++) {
+								DataObjects.vedgetables.put(name, DataObjects.vedgetables.get(name)+1);
+								DataObjects.vedgetablesHouse.put(name, DataObjects.vedgetablesHouse.get(name)+1);
+							}
+							
 						}
 						else {
-							DataObjects.vedgetables.put(name, DataObjects.vedgetables.get(name)+1);
-							DataObjects.vedgetablesSilo.put(name, DataObjects.vedgetablesSilo.get(name)+1);
+							for (int i=0; i<getQuantity();i++) {
+								DataObjects.vedgetables.put(name, DataObjects.vedgetables.get(name)+1);
+								DataObjects.vedgetablesSilo.put(name, DataObjects.vedgetablesSilo.get(name)+1);
+							}
+							
+							
 						}
 						
 					}
