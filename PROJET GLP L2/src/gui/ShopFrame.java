@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -10,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -126,11 +126,6 @@ public class ShopFrame {
 		displayArticle(pnlAnimals, "Lapin", DataAnimal.getRabbitPrice(), DataObjects.animalBuy, "animal", DataAnimal.getRabbitGender());
 		displayArticle(pnlAnimals, "Chèvre", DataAnimal.getGoatPrice(), DataObjects.animalBuy, "animal", DataAnimal.getGoatGender());
 		
-
-		DataObjects.FenceMap.get(2).get(3).setIcon(new ImageIcon("src\\images\\Poule.png"));
-		
-		DataObjects.infraBuy.get("Champ").addActionListener(new AddFieldAction());
-		DataObjects.infraBuy.get("Enclos").addActionListener(new AddFenceAction());
 		
 	}
 	

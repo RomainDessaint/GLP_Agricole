@@ -94,6 +94,7 @@ public class ShopPanel {
 			});
 		}
 		else if (action == "Enclos") {
+			System.out.println("dans ajouter action fence");
 			btnBuy.addActionListener(new AddFenceAction());
 		}
 		else if (action == "infrastructure") {
@@ -312,6 +313,7 @@ public class ShopPanel {
 	
 	public void buyFence() {
 		int index = 0;
+		System.out.println("dans buyfence");
 		while(DataObjects.Fence.get(index).isVisible()) {
 			index++;
 		}
@@ -328,9 +330,13 @@ public class AddFieldAction implements ActionListener {
 
 public class AddFenceAction implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
-		for (int i=0; i<getQuantity()-1; i++) {
-			buyFence();
+		if (getQuantity()>0) {
+			for (int i=0; i<getQuantity(); i++) {
+				System.out.println("dans Addfence Action");
+				buyFence();
+			}
 		}
+		
 		
 	}
 }
