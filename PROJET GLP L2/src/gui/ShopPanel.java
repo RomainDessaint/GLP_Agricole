@@ -274,8 +274,12 @@ public class ShopPanel {
 				    if (shopPanel.getQuantity() == 1)
 				    	jop2.showMessageDialog(null,shopPanel.getQuantity()+" " +shopPanel.getName() +" " +"acheté"+gender+" avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 				    else {
-				    	jop2.showMessageDialog(null,shopPanel.getQuantity()+" " +shopPanel.getName() +"s " +"acheté"+gender+"s avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
-				    }
+				    	if (shopPanel.getName() == "Enclos")
+				    		jop2.showMessageDialog(null,shopPanel.getQuantity()+" " +shopPanel.getName() +" " +"acheté"+gender+"s avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+				    	else {
+				    		jop2.showMessageDialog(null,shopPanel.getQuantity()+" " +shopPanel.getName() +"s " +"acheté"+gender+"s avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+				    	}
+				    }	
 				    shopPanel.setQuantity(0);
 				}
 			}
@@ -330,7 +334,6 @@ public class AddFenceAction implements ActionListener {
 		
 	}
 }
-	
 
 	public JPanel getPanel() {
 		return panel;

@@ -9,11 +9,12 @@ import javax.swing.JPanel;
 import time.Chronometer;
 import time.CyclicCounter;
 
-public class TimePanel extends JPanel implements Runnable {
-
+public class TimePanel extends Thread implements Runnable {
+	private JPanel panel = new JPanel();
 	
 	private static Font font = new Font(Font.MONOSPACED, Font.BOLD, 20);
-	private static final int CHRONO_SPEED = 100;
+	
+	private int speed = 100;
 	
 	private Chronometer chronometer = new Chronometer();	
 	
@@ -46,10 +47,10 @@ public class TimePanel extends JPanel implements Runnable {
 		updateValues();
 		
 		dateValue.setFont(font);
-		this.add(dateValue);
+		panel.add(dateValue);
 		
 		timeValue.setFont(font);
-		this.add(timeValue);
+		panel.add(timeValue);
 	}
 	
 	private void updateValues() {
@@ -76,14 +77,14 @@ public class TimePanel extends JPanel implements Runnable {
 		dateValue.setText(dayValue.getText() + "/" + monthValue.getText() + "/" + yearValue.getText() + "  ");
 		timeValue.setText(hourValue.getText() + ":" + minuteValue.getText());
 		
-		this.repaint();
+		panel.repaint();
 	}
 	
 	@Override
 	public void run() {
 		while (!stop) {
 			try {
-				Thread.sleep(CHRONO_SPEED);
+				Thread.sleep(speed);
 			} catch (InterruptedException e) {
 				System.out.println(e.getMessage());
 			}
@@ -116,4 +117,16 @@ public class TimePanel extends JPanel implements Runnable {
 	public int getCurrentMinute() {
 		return currentMinute;
 	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
+	public JPanel getPanel() {
+		return panel;
+	}	
 }

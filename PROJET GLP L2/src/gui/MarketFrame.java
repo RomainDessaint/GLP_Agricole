@@ -78,7 +78,7 @@ public class MarketFrame {
 	
 	public void displayArticle(JPanel pnlShop, String name, int price, String gender) {
 		Dimension iconDimension = new Dimension(pnlShop.getWidth()-50, 35);
-		MarketPanel pnlArticle = new MarketPanel(name, iconDimension, price);
+		MarketPanel pnlArticle = new MarketPanel(name, iconDimension, price, gender);
 		pnlShop.add(pnlArticle.getPanel());
 	}
 }
