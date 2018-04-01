@@ -62,21 +62,21 @@ public class MarketFrame {
 		frame.setContentPane(pnlContent);
 		frame.setVisible(true);
 		
-		displayArticle(pnlRessources, "Carotte", DataRessource.getCarrotPrice());
-		displayArticle(pnlRessources, "Blé", DataRessource.getWheatPrice());
-		displayArticle(pnlRessources, "Pomme", DataRessource.getApplePrice());
-		displayArticle(pnlRessources, "Tomate", DataRessource.getTomatoPrice());
-		displayArticle(pnlRessources, "Melon", DataRessource.getMeloonPrice());
-		displayArticle(pnlRessources, "Tournesol", DataRessource.getSunflowerPrice());
-		displayArticle(pnlAnimals, "Mouton", DataAnimal.getSheepPrice());
-		displayArticle(pnlAnimals, "Poule", DataAnimal.getChickenPrice());
-		displayArticle(pnlAnimals, "Coq", DataAnimal.getChickenPrice());
-		displayArticle(pnlAnimals, "Cochon", DataAnimal.getPigPrice());
-		displayArticle(pnlAnimals, "Lapin", DataAnimal.getRabbitPrice());
-		displayArticle(pnlAnimals, "Chèvre", DataAnimal.getGoatPrice());
+		displayArticle(pnlRessources, "Carotte", DataRessource.getCarrotPrice(), DataRessource.getCarrotGender());
+		displayArticle(pnlRessources, "Blé", DataRessource.getWheatPrice(), DataRessource.getWheatGender());
+		displayArticle(pnlRessources, "Pomme", DataRessource.getApplePrice(), DataRessource.getAppleGender());
+		displayArticle(pnlRessources, "Tomate", DataRessource.getTomatoPrice(), DataRessource.getTomatoGender());
+		displayArticle(pnlRessources, "Melon", DataRessource.getMeloonPrice(), DataRessource.getMeloonGender());
+		displayArticle(pnlRessources, "Tournesol", DataRessource.getSunflowerPrice(), DataRessource.getSunflowerGender());
+		displayArticle(pnlAnimals, "Mouton", DataAnimal.getSheepPrice(), DataAnimal.getSheepGender());
+		displayArticle(pnlAnimals, "Poule", DataAnimal.getChickenPrice(), DataAnimal.getChickenGender());
+		displayArticle(pnlAnimals, "Coq", DataAnimal.getChickenPrice(), DataAnimal.getChicken2Gender());
+		displayArticle(pnlAnimals, "Cochon", DataAnimal.getPigPrice(), DataAnimal.getPigGender());
+		displayArticle(pnlAnimals, "Lapin", DataAnimal.getRabbitPrice(), DataAnimal.getRabbitGender());
+		displayArticle(pnlAnimals, "Chèvre", DataAnimal.getGoatPrice(), DataAnimal.getGoatGender());
 	}
 	
-	public void displayArticle(JPanel pnlShop, String name, int price) {
+	public void displayArticle(JPanel pnlShop, String name, int price, String gender) {
 		Dimension iconDimension = new Dimension(pnlShop.getWidth()-50, 35);
 		MarketPanel pnlArticle = new MarketPanel(name, iconDimension, price);
 		pnlShop.add(pnlArticle.getPanel());

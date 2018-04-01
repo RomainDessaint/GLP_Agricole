@@ -8,32 +8,59 @@ public class DataAnimal {
 	private static int chickenQuality = 20;
 	private static int chickenPerisability = 10;
 	private static int chickenPrice = 100;
+	private static String chickenGender = "female";
+	private static String chicken2Gender = "male";
 	
 	//Data Cow
 	private static int cowQuality = 40;
 	private static int cowPerisability = 10;
 	private static int cowPrice = 400;
+	private static String cowGender = "female";
 	
 	//Data Pig
 	private static int pigQuality = 30;
 	private static int pigPerisability = 10;
 	private static int pigPrice = 300;
+	private static String pigGender = "male";
 	
 	//Data Rabbit
 	private static int rabbitQuality = 20;
 	private static int rabbitPerisability = 10;
 	private static int rabbitPrice = 500;
+	private static String rabbitGender = "male";
 	
 	//Data Sheep
 	private static int sheepQuality = 30;
 	private static int sheepPerisability = 10;
 	private static int sheepPrice = 500;
+	private static String sheepGender = "male";
 	
 	//Data Sheep
 	private static int goatQuality = 30;
 	private static int goatPerisability = 10;
 	private static int goatPrice = 500;
+	private static String goatGender = "female";
 	
+	public static String getChickenGender() {
+		return chickenGender;
+	}public static String getChicken2Gender() {
+		return chicken2Gender;
+	}
+	public static String getCowGender() {
+		return cowGender;
+	}
+	public static String getPigGender() {
+		return pigGender;
+	}
+	public static String getRabbitGender() {
+		return rabbitGender;
+	}
+	public static String getSheepGender() {
+		return sheepGender;
+	}
+	public static String getGoatGender() {
+		return goatGender;
+	}
 	public static int getChickenQuality() {
 		return chickenQuality;
 	}

@@ -10,6 +10,32 @@ public class DataInfrastructure {
 	private static int fieldPrice = 500;
 	private static int enclosurePrice = 300;
 	
+	private static String reserveGender = "female";
+	private static String siloGender = "male";
+	private static String garageGender = "male";
+	private static String truckGender = "male";
+	private static String fieldGender = "male";
+	private static String enclosureGender = "male";
+	
+	public static String getReserveGender() {
+		return reserveGender;
+	}
+	public static String getSiloGender() {
+		return siloGender;
+	}
+	public static String getGarageGender() {
+		return garageGender;
+	}
+	public static String getTruckGender() {
+		return truckGender;
+	}
+	public static String getFieldGender() {
+		return fieldGender;
+	}
+	public static String getEnclosureGender() {
+		return enclosureGender;
+	}
+	
 	
 	public static int getEnclosurePrice() {
 		return enclosurePrice;

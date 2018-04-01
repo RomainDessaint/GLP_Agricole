@@ -9,6 +9,7 @@ import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import animals.Chicken;
@@ -36,10 +37,11 @@ public class ShopPanel {
 	private JPanel panel = new JPanel();
 	private HashMap<String, Animal> animals = new HashMap<>();
 	int price;
+	String gender;
 	
 	private int quantity;
 
-	public ShopPanel(String name, Dimension iconDimension, int price, HashMap<String, JButton> hashButton, String action) {
+	public ShopPanel(String name, Dimension iconDimension, int price, HashMap<String, JButton> hashButton, String action, String gender) {
 		this.imageArticle = new ImageIcon(new ImageIcon("src\\images\\"+name+".png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		this.articleIcon = new JLabel(imageArticle);
 		this.articleName = new JLabel(name);
@@ -48,6 +50,7 @@ public class ShopPanel {
 		this.quantity = 0;
 		this.price = price;
 		this.name = name;
+		this.gender = gender;
 		
 		panel.setPreferredSize(iconDimension);
 		panel.add(articleIcon);
@@ -163,6 +166,9 @@ public class ShopPanel {
 				return null;
 		}
 	}
+	public String getGender() {
+		return gender;
+	}
 	public void animalInfo(Animal animal) {
 		new AnimalInfo(animal);
 	}
@@ -192,6 +198,9 @@ public class ShopPanel {
 	}
 	public void setBtnBuy(JButton btnBuy) {
 		this.btnBuy = btnBuy;
+	}
+	public String getName() {
+		return name;
 	}
 	
 	public class LessAction implements ActionListener {
@@ -243,18 +252,37 @@ public class ShopPanel {
 			this.shopPanel = shopPanel;
 			this.money = GameFrame.game.getMoney();
 			this.price = price;
-			
-			
 		}
 
 		public void actionPerformed(ActionEvent e) {
+			String gender = ShopPanel.this.getGender();
+			if (gender == "female")
+				gender = "e";
+			else if (gender == "male")
+				gender = "";
 			if(money >= shopPanel.getQuantity()*price) {
-				GameFrame.game.setMoney(money-(shopPanel.getQuantity()*price));
-				MoneyPanel.updateValue();
-				System.out.println(shopPanel.getQuantity()+" " +ShopPanel.this.name +" " +"acheté");
+				if (shopPanel.getQuantity() == 0) {
+					JOptionPane jop1 = new JOptionPane();
+				    ImageIcon img = new ImageIcon("src\\images\\attention.png");
+				    jop1.showMessageDialog(null, "Veuillez sélectionner une quantité", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+				}
+				else {
+					GameFrame.game.setMoney(money-(shopPanel.getQuantity()*price));
+					MoneyPanel.updateValue();
+					JOptionPane jop2 = new JOptionPane();
+				    ImageIcon img = new ImageIcon("src\\images\\Ok.png");
+				    if (shopPanel.getQuantity() == 1)
+				    	jop2.showMessageDialog(null,shopPanel.getQuantity()+" " +shopPanel.getName() +" " +"acheté"+gender+" avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+				    else {
+				    	jop2.showMessageDialog(null,shopPanel.getQuantity()+" " +shopPanel.getName() +"s " +"acheté"+gender+"s avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+				    }
+				    shopPanel.setQuantity(0);
+				}
 			}
 			else {
-				System.out.println("Argent inssufisant");
+				JOptionPane jop2 = new JOptionPane();
+			    ImageIcon img = new ImageIcon("src\\images\\attention.png");
+			    jop2.showMessageDialog(null, "Argent insuffisant", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 			}
 		}
 	}

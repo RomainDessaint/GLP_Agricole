@@ -4,39 +4,75 @@ public class DataRessource {
 	static int wheatQuality = 20;
 	static int wheatPerisability = 50;
 	static int wheatPrice = 10;
+	static String wheatGender = "male";
 	
 	static int carrotQuality = 20;
 	static int carrotPerishability = 50;
 	static int carrotPrice = 10;
+	static String carrotGender = "female";
 	
 	static int appleQuality = 20;
 	static int applePerisability = 50;
 	static int applePrice = 10;
+	static String appleGender = "male";
 	
 	static int tomatoQuality = 20;
 	static int tomatoPerisability = 50;
 	static int tomatoPrice = 10;
+	static String tomatoGender = "female";
 	
 	static int meloonQuality = 20;
 	static int meloonPerisability = 50;
 	static int meloonPrice = 10;
+	static String meloonGender = "male";
 	
 	static int sunflowerQuality = 20;
 	static int sunflowerPerisability = 50;
 	static int sunflowerPrice = 10;
+	static String sunflowerGender = "male";
 	
 	static int saladQuality = 20;
 	static int saladPerisability = 50;
 	static int saladPrice = 10;
+	static String saladGender = "female";
 	
 	static int cornQuality = 20;
 	static int cornPerisability = 50;
 	static int cornPrice = 10;
+	static String cornGender = "male";
 	
 	static int potatoQuality = 20;
 	static int potatoPerisability = 50;
 	static int potatoPrice = 10;
+	static String potatoGender = "female";
 	
+	public static String getWheatGender() {
+		return wheatGender;
+	}
+	public static String getCarrotGender() {
+		return carrotGender;
+	}
+	public static String getAppleGender() {
+		return appleGender;
+	}
+	public static String getTomatoGender() {
+		return tomatoGender;
+	}
+	public static String getMeloonGender() {
+		return meloonGender;
+	}
+	public static String getSunflowerGender() {
+		return sunflowerGender;
+	}
+	public static String getSaladGender() {
+		return saladGender;
+	}
+	public static String getCornGender() {
+		return cornGender;
+	}
+	public static String getPotatoGender() {
+		return potatoGender;
+	}	
 	public static int getWheatQuality() {
 		return wheatQuality;
 	}

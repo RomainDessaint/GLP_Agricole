@@ -105,26 +105,26 @@ public class ShopFrame {
 		
 		frame.setContentPane(pnlContent);
 		frame.setVisible(true);
-		displayArticle(pnlInfrastructures, "Réserve", DataInfrastructure.getReservePrice(), DataObjects.infraBuy, "infrastructure");
-		displayArticle(pnlInfrastructures, "Silo", DataInfrastructure.getSiloPrice(), DataObjects.infraBuy, "infrastructure");
-		displayArticle(pnlInfrastructures, "Garage", DataInfrastructure.getGaragePrice(), DataObjects.infraBuy, "infrastructure");
-		displayArticle(pnlInfrastructures, "Camion", DataInfrastructure.getTruckPrice(), DataObjects.infraBuy, "infrastructure");
-		displayArticle(pnlInfrastructures, "Champ", DataInfrastructure.getFieldPrice(), DataObjects.infraBuy, "Champs");
-		displayArticle(pnlInfrastructures, "Enclos", DataInfrastructure.getEnclosurePrice(), DataObjects.infraBuy, "Enclos");
+		displayArticle(pnlInfrastructures, "Réserve", DataInfrastructure.getReservePrice(), DataObjects.infraBuy, "infrastructure", DataInfrastructure.getReserveGender());
+		displayArticle(pnlInfrastructures, "Silo", DataInfrastructure.getSiloPrice(), DataObjects.infraBuy, "infrastructure", DataInfrastructure.getSiloGender());
+		displayArticle(pnlInfrastructures, "Garage", DataInfrastructure.getGaragePrice(), DataObjects.infraBuy, "infrastructure", DataInfrastructure.getGarageGender());
+		displayArticle(pnlInfrastructures, "Camion", DataInfrastructure.getTruckPrice(), DataObjects.infraBuy, "infrastructure", DataInfrastructure.getTruckGender());
+		displayArticle(pnlInfrastructures, "Champ", DataInfrastructure.getFieldPrice(), DataObjects.infraBuy, "Champs", DataInfrastructure.getFieldGender());
+		displayArticle(pnlInfrastructures, "Enclos", DataInfrastructure.getEnclosurePrice(), DataObjects.infraBuy, "Enclos", DataInfrastructure.getEnclosureGender());
 		
-		displayArticle(pnlRessources, "Carotte", DataRessource.getCarrotPrice(), DataObjects.ressourcesBuy, "ressources");
-		displayArticle(pnlRessources, "Blé", DataRessource.getWheatPrice(), DataObjects.ressourcesBuy, "ressources");
-		displayArticle(pnlRessources, "Pomme", DataRessource.getApplePrice(), DataObjects.ressourcesBuy, "ressources");
-		displayArticle(pnlRessources, "Tomate", DataRessource.getTomatoPrice(), DataObjects.ressourcesBuy, "ressources");
-		displayArticle(pnlRessources, "Melon", DataRessource.getMeloonPrice(), DataObjects.ressourcesBuy, "ressources");
-		displayArticle(pnlRessources, "Tournesol", DataRessource.getSunflowerPrice(), DataObjects.ressourcesBuy, "ressources");
+		displayArticle(pnlRessources, "Carotte", DataRessource.getCarrotPrice(), DataObjects.ressourcesBuy, "ressources", DataRessource.getCarrotGender());
+		displayArticle(pnlRessources, "Blé", DataRessource.getWheatPrice(), DataObjects.ressourcesBuy, "ressources", DataRessource.getWheatGender());
+		displayArticle(pnlRessources, "Pomme", DataRessource.getApplePrice(), DataObjects.ressourcesBuy, "ressources", DataRessource.getAppleGender());
+		displayArticle(pnlRessources, "Tomate", DataRessource.getTomatoPrice(), DataObjects.ressourcesBuy, "ressources", DataRessource.getTomatoGender());
+		displayArticle(pnlRessources, "Melon", DataRessource.getMeloonPrice(), DataObjects.ressourcesBuy, "ressources", DataRessource.getMeloonGender());
+		displayArticle(pnlRessources, "Tournesol", DataRessource.getSunflowerPrice(), DataObjects.ressourcesBuy, "ressources", DataRessource.getSunflowerGender());
 		
-		displayArticle(pnlAnimals, "Mouton", DataAnimal.getSheepPrice(), DataObjects.animalBuy, "animal");
-		displayArticle(pnlAnimals, "Poule", DataAnimal.getChickenPrice(), DataObjects.animalBuy, "animal");
-		displayArticle(pnlAnimals, "Coq", DataAnimal.getChickenPrice(), DataObjects.animalBuy, "animal");
-		displayArticle(pnlAnimals, "Cochon", DataAnimal.getPigPrice(), DataObjects.animalBuy, "animal");
-		displayArticle(pnlAnimals, "Lapin", DataAnimal.getRabbitPrice(), DataObjects.animalBuy, "animal");
-		displayArticle(pnlAnimals, "Chèvre", DataAnimal.getGoatPrice(), DataObjects.animalBuy, "animal");
+		displayArticle(pnlAnimals, "Mouton", DataAnimal.getSheepPrice(), DataObjects.animalBuy, "animal", DataAnimal.getSheepGender());
+		displayArticle(pnlAnimals, "Poule", DataAnimal.getChickenPrice(), DataObjects.animalBuy, "animal", DataAnimal.getChickenGender());
+		displayArticle(pnlAnimals, "Coq", DataAnimal.getChickenPrice(), DataObjects.animalBuy, "animal", DataAnimal.getChicken2Gender());
+		displayArticle(pnlAnimals, "Cochon", DataAnimal.getPigPrice(), DataObjects.animalBuy, "animal", DataAnimal.getPigGender());
+		displayArticle(pnlAnimals, "Lapin", DataAnimal.getRabbitPrice(), DataObjects.animalBuy, "animal", DataAnimal.getRabbitGender());
+		displayArticle(pnlAnimals, "Chèvre", DataAnimal.getGoatPrice(), DataObjects.animalBuy, "animal", DataAnimal.getGoatGender());
 		
 
 		DataObjects.FenceMap.get(2).get(3).setIcon(new ImageIcon("src\\images\\Poule.png"));
@@ -194,9 +194,9 @@ public HashMap<String, JButton> getInfraBuy() {
 
 
 	
-	public void displayArticle(JPanel pnlShop, String name, int price, HashMap<String, JButton> hashButton, String action) {
+	public void displayArticle(JPanel pnlShop, String name, int price, HashMap<String, JButton> hashButton, String action, String gender) {
 		Dimension iconDimension = new Dimension(pnlShop.getWidth()-50, 35);
-		ShopPanel pnlArticle = new  ShopPanel(name, iconDimension, price, hashButton, action);
+		ShopPanel pnlArticle = new  ShopPanel(name, iconDimension, price, hashButton, action, gender);
 		pnlShop.add(pnlArticle.getPanel());
 	}
 
