@@ -263,31 +263,28 @@ public class ShopPanel {
 				gender = "";
 			if(money >= shopPanel.getQuantity()*price) {
 				if (shopPanel.getQuantity() == 0) {
-					JOptionPane jop1 = new JOptionPane();
 				    ImageIcon img = new ImageIcon("src\\images\\attention.png");
-				    jop1.showMessageDialog(null, "Veuillez sélectionner une quantité", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+				    JOptionPane.showMessageDialog(null, "Veuillez sélectionner une quantité", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 				}
 				else {
 					GameFrame.game.setMoney(money-(shopPanel.getQuantity()*price));
 					MoneyPanel.updateValue();
-					JOptionPane jop2 = new JOptionPane();
 				    ImageIcon img = new ImageIcon("src\\images\\Ok.png");
 				    if (shopPanel.getQuantity() == 1)
-				    	jop2.showMessageDialog(null,shopPanel.getQuantity()+" " +shopPanel.getName() +" " +"acheté"+gender+" avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+				    	JOptionPane.showMessageDialog(null,shopPanel.getQuantity()+" " +shopPanel.getName() +" " +"acheté"+gender+" avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 				    else {
 				    	if (shopPanel.getName() == "Enclos")
-				    		jop2.showMessageDialog(null,shopPanel.getQuantity()+" " +shopPanel.getName() +" " +"acheté"+gender+"s avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+				    		JOptionPane.showMessageDialog(null,shopPanel.getQuantity()+" " +shopPanel.getName() +" " +"acheté"+gender+"s avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 				    	else {
-				    		jop2.showMessageDialog(null,shopPanel.getQuantity()+" " +shopPanel.getName() +"s " +"acheté"+gender+"s avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+				    		JOptionPane.showMessageDialog(null,shopPanel.getQuantity()+" " +shopPanel.getName() +"s " +"acheté"+gender+"s avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 				    	}
 				    }	
 				    shopPanel.setQuantity(0);
 				}
 			}
 			else {
-				JOptionPane jop2 = new JOptionPane();
 			    ImageIcon img = new ImageIcon("src\\images\\attention.png");
-			    jop2.showMessageDialog(null, "Argent insuffisant", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+			    JOptionPane.showMessageDialog(null, "Argent insuffisant", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 			}
 			articleQuantity.setText(" "+Integer.toString(quantity)+" ");
 		}

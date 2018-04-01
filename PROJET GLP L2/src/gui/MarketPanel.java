@@ -147,22 +147,20 @@ public class MarketPanel{
 			
 			if (marketPanel.getQuantity() == 0) {
 				System.out.println("Veuillez sélectionner une quantité");
-				JOptionPane jop1 = new JOptionPane();
 			    ImageIcon img = new ImageIcon("src\\images\\attention.png");
-			    jop1.showMessageDialog(null, "Veuillez sélectionner une quantité", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+			    JOptionPane.showMessageDialog(null, "Veuillez sélectionner une quantité", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 			}
 			else {
 				GameFrame.game.setMoney(money+(marketPanel.getQuantity()*price));
 				MoneyPanel.updateValue();
-				JOptionPane jop2 = new JOptionPane();
 			    ImageIcon img = new ImageIcon("src\\images\\Ok.png");
 			    if (marketPanel.getQuantity() == 1 || marketPanel.getName() == "Enclos")
-			    	jop2.showMessageDialog(null,marketPanel.getQuantity()+" " +marketPanel.getName() +" " +"vendu"+gender+" avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+			    	JOptionPane.showMessageDialog(null,marketPanel.getQuantity()+" " +marketPanel.getName() +" " +"vendu"+gender+" avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 			    else {
 			    	if (marketPanel.getName() == "Enclos")
-			    		jop2.showMessageDialog(null,marketPanel.getQuantity()+" " +marketPanel.getName() +"s " +"vendu"+gender+"s avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+			    		JOptionPane.showMessageDialog(null,marketPanel.getQuantity()+" " +marketPanel.getName() +"s " +"vendu"+gender+"s avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 			    	else {
-				    	jop2.showMessageDialog(null,marketPanel.getQuantity()+" " +marketPanel.getName() +"s " +"vendu"+gender+"s avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+				    	JOptionPane.showMessageDialog(null,marketPanel.getQuantity()+" " +marketPanel.getName() +"s " +"vendu"+gender+"s avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 				    }
 			    }	
 			    marketPanel.setQuantity(0);
