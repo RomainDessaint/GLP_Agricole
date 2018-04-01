@@ -210,4 +210,3 @@ public HashMap<String, JButton> getInfraBuy() {
 		this.frame = frame;
 	}
 }
-

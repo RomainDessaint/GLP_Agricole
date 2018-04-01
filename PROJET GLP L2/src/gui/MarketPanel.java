@@ -51,7 +51,6 @@ public class MarketPanel{
 		btnLess.addActionListener(new LessAction(articleQuantity));
 		btnPlus.addActionListener(new PlusAction(articleQuantity));
 		btnSell.addActionListener( new SellAction(this, price));
-		
 	}
 	
 	public String getGender() {

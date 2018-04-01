@@ -48,12 +48,9 @@ public class GameFrame {
 	private GridBagLayout gridLayout;
 	private GridBagConstraints gridConstraints;
 	
-	private FarmInitializer farmInitializer;
-	
-	
+	private FarmInitializer farmInitializer;	
 
 	static Game game;
-
 	
 	public GameFrame(Game game) {
 		frame.setTitle("Farm Simulator");

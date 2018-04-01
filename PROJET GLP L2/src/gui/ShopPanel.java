@@ -334,7 +334,6 @@ public class AddFenceAction implements ActionListener {
 		
 	}
 }
-	
 
 	public JPanel getPanel() {
 		return panel;
