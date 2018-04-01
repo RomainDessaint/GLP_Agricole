@@ -14,7 +14,7 @@ public class TimePanel extends Thread implements Runnable {
 	
 	private static Font font = new Font(Font.MONOSPACED, Font.BOLD, 20);
 	
-	private int speed = 100;
+	private int speed = 1000;
 	
 	private Chronometer chronometer = new Chronometer();	
 	
@@ -29,6 +29,7 @@ public class TimePanel extends Thread implements Runnable {
 	
 	private TimePanel instance = this;
 	
+	private boolean on = true;
 	private boolean stop = false;
 	
 	private int currentYear;
@@ -82,14 +83,23 @@ public class TimePanel extends Thread implements Runnable {
 	
 	@Override
 	public void run() {
-		while (!stop) {
-			try {
-				Thread.sleep(speed);
-			} catch (InterruptedException e) {
-				System.out.println(e.getMessage());
+		while (on) {
+			if(!stop) {
+				try {
+					Thread.sleep(speed);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+				chronometer.increment();
+				GameFrame.tick();
+				updateValues();
+			} else {
+				try {
+					Thread.sleep(1);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
 			}
-			chronometer.increment();
-			updateValues();
 		}
 	}
 	
@@ -128,5 +138,14 @@ public class TimePanel extends Thread implements Runnable {
 
 	public JPanel getPanel() {
 		return panel;
+	}
+
+	public boolean isStop() {
+		return stop;
+	}
+
+	public void setStop(boolean stop) {
+		this.stop = stop;
 	}	
 }
+

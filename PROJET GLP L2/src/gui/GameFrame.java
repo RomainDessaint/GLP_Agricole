@@ -52,6 +52,8 @@ public class GameFrame {
 	private JButton btnTimeStop;
 	private JButton btnTimeLess;
 	
+	private static JButton farmer;
+	
 	private ImageIcon iiFlecheD;
 	private ImageIcon iiFlecheG;
 	
@@ -97,6 +99,18 @@ public class GameFrame {
         
         //PANEL DASHBOARD
 		pnlDb.setLayout(null);
+		
+		//PANEL ANIMATION
+		JPanel animePanel = new JPanel();
+		animePanel.setBounds(0, 0, 1200, 600);
+		animePanel.setBackground(new Color(100, 0, 0, 255));
+		animePanel.setOpaque(false);
+		animePanel.setLayout(null);
+		
+		farmer = initButton("src\\images\\link.png", animePanel);
+		farmer.setBounds(100, 400, 100, 100);
+		
+		pnlDb.add(animePanel);
 		
 		farmInitializer = new FarmInitializer(pnlDb, frame.getWidth(), frame.getHeight());
 		farmInitializer.InsertFence();
@@ -178,6 +192,7 @@ public class GameFrame {
 		btnHideOpt.setBounds(940, 440, 50, 50);
 		btnHideOpt.setVisible(false);
 		pnlDb = farmInitializer.drawGround();
+		
 		pnlCenter.setLeftComponent(pnlDb);
 
 		//PANEL OPTION
@@ -222,7 +237,7 @@ public class GameFrame {
 		btnSpoilOpt.addActionListener(new SpoilOptAction(btnSpoilOpt, btnHideOpt));
 		btnHideOpt.addActionListener(new HideOptAction(btnSpoilOpt, btnHideOpt));
 		btnTimeLess.addActionListener(new LessTimeAction(getInfoTime()));
-		btnTimeStop.addActionListener(new StopTimeAction(getInfoTime()));
+		btnTimeStop.addActionListener(new StopTimeAction(getInfoTime(), btnTimeStop));
 		btnTimeMore.addActionListener(new MoreTimeAction(getInfoTime()));
 		
 		btnHouse.addActionListener(new OpenHouseAction());
@@ -233,6 +248,24 @@ public class GameFrame {
 		
 		frame.setContentPane(pnlMain);
 		frame.setVisible(true);
+	}
+	
+	public static void farmerPosition(String direction, int posX, int posY) {
+		switch(direction) {
+		case "N" : 
+			break;
+		case "S" : 
+			break;
+		case "E" : posX = posX + 1;
+			break;
+		case "W" :
+			break;
+		}
+		GameFrame.farmer.setBounds(posX, posY, 100, 100);
+	}
+	
+	public static void tick() {
+		farmerPosition("E", GameFrame.farmer.getX(), farmer.getY());
 	}
 	
 	public FarmInitializer getFarmInitializer() {
@@ -348,19 +381,33 @@ public class GameFrame {
 		}
 		
 		public void actionPerformed(ActionEvent e) {
-			infoTime.setSpeed(2);
+			infoTime.setSpeed(infoTime.getSpeed()/5);
+			if(infoTime.getSpeed()<5)
+				infoTime.setSpeed(5);
 		}
 	}
 	
 	public class StopTimeAction implements ActionListener {
 		private TimePanel infoTime;
+		private JButton btnTimeStop;
 		
-		public StopTimeAction(TimePanel infoTime) {
+		public StopTimeAction(TimePanel infoTime, JButton btnTimeStop) {
+			this.btnTimeStop = btnTimeStop;
 			this.infoTime = infoTime;
 		}
 		
 		public void actionPerformed(ActionEvent e) {
-			this.infoTime.setSpeed(999999999);
+			if(!this.infoTime.isStop()) {
+				this.infoTime.setStop(true);
+				System.out.println("STOPP");
+				ImageIcon image1 = new ImageIcon("src\\images\\play.png");
+				btnTimeStop.setIcon(image1);
+			}
+			else if(this.infoTime.isStop()) {
+				this.infoTime.setStop(false);
+				ImageIcon image2 = new ImageIcon("src\\images\\pause.png");
+				btnTimeStop.setIcon(image2);
+			}
 		}
 	}
 	
@@ -372,7 +419,9 @@ public class GameFrame {
 		}
 		
 		public void actionPerformed(ActionEvent e) {
-			infoTime.setSpeed(400);
+				this.infoTime.setSpeed(infoTime.getSpeed()*5);
+			if(infoTime.getSpeed()>1000)
+				this.infoTime.setSpeed(1000);
 		}
 	}
 	
