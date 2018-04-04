@@ -14,7 +14,7 @@ public class TimePanel extends Thread implements Runnable {
 	
 	private static Font font = new Font(Font.MONOSPACED, Font.BOLD, 20);
 	
-	private int speed = 1000;
+	private int speed = 100;
 	
 	private Chronometer chronometer = new Chronometer();	
 	
@@ -91,7 +91,7 @@ public class TimePanel extends Thread implements Runnable {
 					System.out.println(e.getMessage());
 				}
 				chronometer.increment();
-				GameFrame.tick();
+				GameFrame.multiTick();
 				updateValues();
 			} else {
 				try {

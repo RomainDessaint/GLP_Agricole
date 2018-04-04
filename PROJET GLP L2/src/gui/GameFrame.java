@@ -4,14 +4,18 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -47,20 +51,22 @@ public class GameFrame {
 	private JButton btnHouse;
 	private JButton btnShop;
 	private JButton btnMarket;
-	private JButton btntypeDay;
 	private JButton btnTimeMore;
 	private JButton btnTimeStop;
 	private JButton btnTimeLess;
 	
 	private static JButton farmer;
 	
-	private ImageIcon iiFlecheD;
-	private ImageIcon iiFlecheG;
-	
 	private GridBagLayout gridLayout;
 	private GridBagConstraints gridConstraints;
 	
 	private FarmInitializer farmInitializer;
+	
+	static boolean farmerOn = false;
+	static int targetX;
+	static int targetY;
+	
+	static JLabel location;
 	
 	static Game game;
 	
@@ -107,9 +113,8 @@ public class GameFrame {
 		animePanel.setOpaque(false);
 		animePanel.setLayout(null);
 		
-		farmer = initButton("src\\images\\link.png", animePanel);
-		farmer.setBounds(100, 400, 100, 100);
-		
+		farmer = initButton("src\\images\\linkright.png", animePanel);
+		farmer.setBounds(100, 400, 50, 50);
 		pnlDb.add(animePanel);
 		
 		farmInitializer = new FarmInitializer(pnlDb, frame.getWidth(), frame.getHeight());
@@ -245,27 +250,80 @@ public class GameFrame {
 		btnGarage.addActionListener(new OpenGarageAction());
 		
 		frame.addWindowListener(new WindowAdapter());
+		pnlDb.addMouseListener(new dbClickAction(this, pnlDb));
 		
 		frame.setContentPane(pnlMain);
 		frame.setVisible(true);
 	}
 	
-	public static void farmerPosition(String direction, int posX, int posY) {
+	public static boolean isFarmerOn() {
+		return farmerOn;
+	}
+	public static void setFarmerOn(boolean on) {
+		farmerOn = on;
+	}
+	public static int getTargetX() {
+		return targetX;
+	}
+	public void setTargetX(int targetX) {
+		GameFrame.targetX = targetX;
+	}
+	public static int getTargetY() {
+		return targetY;
+	}
+	public void setTargetY(int targetY) {
+		GameFrame.targetY = targetY;
+	}
+	public JPanel getDbPanel() {
+		return pnlDb;
+	}
+	
+	public static void moveFarmer(String direction, int posX, int posY) {
+		int pas = 1;
 		switch(direction) {
-		case "N" : 
+		case "N" : posY = posY - pas;
+			farmer.setIcon(new ImageIcon("src\\images\\linkback.png"));
 			break;
-		case "S" : 
+		case "S" : posY = posY + pas;
+			farmer.setIcon(new ImageIcon("src\\images\\linkface.png"));
 			break;
-		case "E" : posX = posX + 1;
+		case "E" : posX = posX + pas;
+		farmer.setIcon(new ImageIcon("src\\images\\linkright.png"));
 			break;
-		case "W" :
+		case "W" : posX = posX - pas;
+			farmer.setIcon(new ImageIcon("src\\images\\linkleft.png"));
 			break;
-		}
-		GameFrame.farmer.setBounds(posX, posY, 100, 100);
+		}		
+		GameFrame.farmer.setBounds(posX, posY, 50, 50);
+	}
+	
+	public static void multiTick() {
+		for(int i=0; i<10; i++)
+			tick();
 	}
 	
 	public static void tick() {
-		farmerPosition("E", GameFrame.farmer.getX(), farmer.getY());
+		int posX = farmer.getX();
+		int posY = farmer.getY();
+		int targetX = getTargetX();
+		int targetY = getTargetY();
+		int precision = 5;
+		int raw = 10;		
+		if(isFarmerOn()) {
+			if(posX + farmer.getWidth()/2 < targetX)
+				GameFrame.moveFarmer("E", posX, posY);
+			if(posX + farmer.getWidth()/2> targetX)
+				GameFrame.moveFarmer("W", posX, posY);
+			if(posY + farmer.getHeight()/2 < targetY)
+				GameFrame.moveFarmer("S", posX, posY);
+			if(posY + farmer.getHeight()/2 > targetY)
+				GameFrame.moveFarmer("N", posX, posY);
+		}
+		if((posX - precision <= targetX) && (targetX <= posX + precision)) {
+			if ((posY - precision <= targetY ) && (targetY <= posY + precision)) {
+				setFarmerOn(false);
+			}
+		}
 	}
 	
 	public FarmInitializer getFarmInitializer() {
@@ -296,6 +354,43 @@ public class GameFrame {
 		optB.setBackground(new Color(255, 0, 0, 0));
 		optB.setBorder(null);
 		return optB;
+	}
+	
+	public class dbClickAction implements MouseListener {
+		GameFrame gameFrame;
+		JPanel pnlDb;
+		int mouseX;
+		int mouseY;
+
+		public dbClickAction(GameFrame frame, JPanel pnlDb) {
+			this.gameFrame = frame;
+			this.pnlDb = pnlDb;
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			mouseX = arg0.getX();
+			mouseY = arg0.getY();
+			GameFrame.setFarmerOn(true);
+			gameFrame.setTargetX(mouseX);
+			gameFrame.setTargetY(mouseY);
+		}
+		
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+		}
+		
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+		}
 	}
 
 	public class OpenGarageAction implements ActionListener {
