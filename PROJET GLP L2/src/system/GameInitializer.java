@@ -21,11 +21,6 @@ public class GameInitializer {
 		return shop;
 	}
 
-	public static HashMap<String, Infrastructure> initInfrastructures() {
-		HashMap<String, Infrastructure> infrastructures = new HashMap<String, Infrastructure>();
-		return infrastructures;
-	}
-
 	public static HashMap<String, Player> initPlayers() {
 		HashMap<String, Player> players = new HashMap<String, Player>();
 		return players;

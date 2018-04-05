@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import types.Animal;
+import types.Ressource;
 
 public class DataObjects {
 	public static int MaxKgHouseVegds = 100;
@@ -36,14 +37,15 @@ public class DataObjects {
 	
 //	voir la différence entre les 2
 	public static HashMap<String, Animal> Animals = new HashMap<>();
+	public static HashMap<String, Ressource> Ressources = new HashMap<>();
 	
-	private DataObjects() {
-		
+	private DataObjects() {	
 	}
+	
 	public static void addMeatKg(int quantity) {
 		CurrentKgHouseMeat += quantity;
 	}
 	public static void addVedgsKg(int quantity) {
 		CurrentKgHouseVedgs += quantity;
-	}
+	}	
 }

@@ -10,5 +10,4 @@ public class Chicken extends Animal {
 		this.setQuality(DataAnimal.getChickenQuality());
 		this.setWeight(3);
 	}
-	
 }

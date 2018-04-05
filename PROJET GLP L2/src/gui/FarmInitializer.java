@@ -30,9 +30,13 @@ public class FarmInitializer {
 		this.pnlFarm.setOpaque(true);
 		DataObjects.vedgetables.put("Carotte", 1);
 		DataObjects.vedgetables.put("Carotte", 2);
+		for (int i=0; i<6; i++) {
+			insertFence();
+			insertField();
+		}
 	}
 
-	public void InsertFence() {
+	public void insertFence() {
 		JPanel pnlFence = new JPanel();
 		if (DataObjects.FenceMap.size()%2 == 0) {
 			 pnlFence = DrawFarm.drawFence(DataObjects.FenceMap.size()*100+15, 200, 100);
@@ -50,7 +54,7 @@ public class FarmInitializer {
 		indexFence++;
 	}
 	
-	public void InsertField() {
+	public void insertField() {
 		JPanel pnlField = new JPanel();
 		if (DataObjects.FieldMap.size()%2 == 0) {
 			 pnlField = DrawFarm.drawfield(850,DataObjects.FieldMap.size()*70+60, 100);

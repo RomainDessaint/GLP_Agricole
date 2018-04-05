@@ -29,9 +29,7 @@ public class HouseInfo {
 	}
 	public void initHouseInfo() {
 		meats.setBounds(0, 0, fram.getWidth()/2, getFram().getHeight());
-		vedgs.setBounds(meats.getWidth(), 0, fram.getWidth()/2, fram.getHeight());
-		meats.setBackground(Color.green);
-		vedgs.setBackground(Color.red);
+		vedgs.setBounds(meats.getWidth(), 0, fram.getWidth()/2, fram.getHeight());		
 		meats.setOpaque(true);
 		meats.setLayout(null);
 		vedgs.setLayout(null);

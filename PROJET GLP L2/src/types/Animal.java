@@ -67,10 +67,17 @@ public abstract class Animal {
 	public void incrementAge() {
 		age++;
 	}
+	
+	public void incrementWeigh() {
+		weight++;
+	}
+	
 	public void AnimalDeath() {
 		live = false;
 	}
+	
 	public void decrementPerisability() {
 		perishability--;
 	}
+	
 }

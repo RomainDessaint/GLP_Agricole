@@ -165,7 +165,6 @@ public class NewGameFrame {
 			Game game = GameInitializer.newGame();
 			game.setGameName(tfGameName.getText());
 			game.setDifficulty(jcDifficulty.getSelectedIndex());
-			game.setInfrastructures(GameInitializer.initInfrastructures());
 			game.setPlayers(GameInitializer.initPlayers());
 			game.setShop(GameInitializer.newShop());
 			game.setMoney(DataGame.getStartingMoney(game.getDifficulty()));

@@ -4,13 +4,14 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,6 +23,7 @@ import javax.swing.JSplitPane;
 
 import datas.DataObjects;
 import system.Game;
+import types.Animal;
 
 public class GameFrame {
 	private JSplitPane pnlMain;
@@ -41,8 +43,8 @@ public class GameFrame {
 	private JFrame frame = new JFrame();
 	
 	private HouseInfo houseInfo;
-	private SiloInfo siloInfo ;
-	private GarageInfo garagrInfo;
+	private SiloInfo siloInfo;
+	private GarageInfo garageInfo;
 	
 	private MarketFrame marketFrame;
 
@@ -65,6 +67,7 @@ public class GameFrame {
 	static boolean farmerOn = false;
 	static int targetX;
 	static int targetY;
+	static int raw = 0;
 	
 	static JLabel location;
 	
@@ -118,60 +121,6 @@ public class GameFrame {
 		pnlDb.add(animePanel);
 		
 		farmInitializer = new FarmInitializer(pnlDb, frame.getWidth(), frame.getHeight());
-		farmInitializer.InsertFence();
-		farmInitializer.InsertFence();
-		farmInitializer.InsertFence();
-		farmInitializer.InsertFence();
-		farmInitializer.InsertFence();
-		farmInitializer.InsertFence();
-		
-		farmInitializer.InsertField();
-		farmInitializer.InsertField();
-		farmInitializer.InsertField();
-		farmInitializer.InsertField();
-		farmInitializer.InsertField();
-		farmInitializer.InsertField();
-		
-		DataObjects.FieldMap.get(0).get(3).setIcon(new ImageIcon("src\\images\\Carotte.png"));
-		DataObjects.FieldMap.get(0).get(4).setIcon(new ImageIcon("src\\images\\Carotte.png"));
-		DataObjects.FieldMap.get(0).get(6).setIcon(new ImageIcon("src\\images\\Carotte.png"));
-		DataObjects.FieldMap.get(0).get(8).setIcon(new ImageIcon("src\\images\\Carotte.png"));
-		DataObjects.FieldMap.get(0).get(6).setIcon(new ImageIcon("src\\images\\Tomate.png"));
-		DataObjects.FieldMap.get(0).get(0).setIcon(new ImageIcon("src\\images\\Carotte.png"));
-		DataObjects.FieldMap.get(0).get(1).setIcon(new ImageIcon("src\\images\\Carotte.png"));
-		DataObjects.FieldMap.get(0).get(2).setIcon(new ImageIcon("src\\images\\Pomme.png"));
-		DataObjects.FieldMap.get(0).get(5).setIcon(new ImageIcon("src\\images\\Pomme.png"));
-		DataObjects.FieldMap.get(0).get(6).setIcon(new ImageIcon("src\\images\\Tomate.png"));
-		DataObjects.FieldMap.get(1).get(3).setIcon(new ImageIcon("src\\images\\Tomate.png"));
-		DataObjects.FieldMap.get(1).get(2).setIcon(new ImageIcon("src\\images\\Tomate.png"));
-		DataObjects.FieldMap.get(1).get(5).setIcon(new ImageIcon("src\\images\\Carotte.png"));
-		DataObjects.FieldMap.get(1).get(8).setIcon(new ImageIcon("src\\images\\Carotte.png"));
-		DataObjects.FieldMap.get(1).get(0).setIcon(new ImageIcon("src\\images\\Carotte.png"));
-		DataObjects.FieldMap.get(0).get(0).setIcon(new ImageIcon("src\\images\\Carotte.png"));
-		
-		DataObjects.FieldMap.get(1).get(0).setIcon(new ImageIcon("src\\images\\Carotte.png"));
-		DataObjects.FieldMap.get(1).get(1).setIcon(new ImageIcon("src\\images\\Carotte.png"));
-		DataObjects.FieldMap.get(1).get(2).setIcon(new ImageIcon("src\\images\\Pomme.png"));
-		DataObjects.FieldMap.get(2).get(5).setIcon(new ImageIcon("src\\images\\Pomme.png"));
-		DataObjects.FieldMap.get(2).get(6).setIcon(new ImageIcon("src\\images\\Tomate.png"));
-		DataObjects.FieldMap.get(2).get(3).setIcon(new ImageIcon("src\\images\\Tomate.png"));
-		DataObjects.FieldMap.get(2).get(2).setIcon(new ImageIcon("src\\images\\Tomate.png"));
-		DataObjects.FieldMap.get(2).get(5).setIcon(new ImageIcon("src\\images\\Tournesol.png"));
-		DataObjects.FieldMap.get(1).get(8).setIcon(new ImageIcon("src\\images\\Tournesol.png"));
-		DataObjects.FieldMap.get(1).get(0).setIcon(new ImageIcon("src\\images\\Tournesol.png"));
-		DataObjects.FieldMap.get(0).get(0).setIcon(new ImageIcon("src\\images\\Tournesol.png"));
-		
-		DataObjects.FieldMap.get(3).get(0).setIcon(new ImageIcon("src\\images\\Carotte.png"));
-		DataObjects.FieldMap.get(3).get(1).setIcon(new ImageIcon("src\\images\\Carotte.png"));
-		DataObjects.FieldMap.get(3).get(2).setIcon(new ImageIcon("src\\images\\Tournesol.png"));
-		DataObjects.FieldMap.get(4).get(5).setIcon(new ImageIcon("src\\images\\Tournesol.png"));
-		DataObjects.FieldMap.get(3).get(6).setIcon(new ImageIcon("src\\images\\Tomate.png"));
-		DataObjects.FieldMap.get(3).get(3).setIcon(new ImageIcon("src\\images\\Tomate.png"));
-		DataObjects.FieldMap.get(4).get(2).setIcon(new ImageIcon("src\\images\\Tomate.png"));
-		DataObjects.FieldMap.get(4).get(5).setIcon(new ImageIcon("src\\images\\Carotte.png"));
-		DataObjects.FieldMap.get(4).get(8).setIcon(new ImageIcon("src\\images\\Carotte.png"));
-		DataObjects.FieldMap.get(4).get(0).setIcon(new ImageIcon("src\\images\\Tournesol.png"));
-		DataObjects.FieldMap.get(4).get(0).setIcon(new ImageIcon("src\\images\\Carotte.png"));
 		
 		btnHouse = initButton("src\\images\\house.png", pnlDb);
 		btnHouse.setBounds(10, 50, new ImageIcon("src\\images\\house.png").getIconWidth(), new ImageIcon("src\\images\\house.png").getIconHeight());
@@ -297,33 +246,40 @@ public class GameFrame {
 		GameFrame.farmer.setBounds(posX, posY, 50, 50);
 	}
 	
-	public static void multiTick() {
-		for(int i=0; i<10; i++)
-			tick();
-	}
-	
 	public static void tick() {
-		int posX = farmer.getX();
-		int posY = farmer.getY();
-		int targetX = getTargetX();
-		int targetY = getTargetY();
-		int precision = 5;
-		int raw = 10;		
-		if(isFarmerOn()) {
-			if(posX + farmer.getWidth()/2 < targetX)
-				GameFrame.moveFarmer("E", posX, posY);
-			if(posX + farmer.getWidth()/2> targetX)
-				GameFrame.moveFarmer("W", posX, posY);
-			if(posY + farmer.getHeight()/2 < targetY)
-				GameFrame.moveFarmer("S", posX, posY);
-			if(posY + farmer.getHeight()/2 > targetY)
-				GameFrame.moveFarmer("N", posX, posY);
-		}
-		if((posX - precision <= targetX) && (targetX <= posX + precision)) {
-			if ((posY - precision <= targetY ) && (targetY <= posY + precision)) {
-				setFarmerOn(false);
+		for(int i=0; i<10; i++) {
+			int posX = farmer.getX();
+			int posY = farmer.getY();
+			int targetX = getTargetX();
+			int targetY = getTargetY();
+			int precision = 5;	
+			if(isFarmerOn()) {
+				if(posX + farmer.getWidth()/2 < targetX)
+					GameFrame.moveFarmer("E", posX, posY);
+				if(posX + farmer.getWidth()/2> targetX)
+					GameFrame.moveFarmer("W", posX, posY);
+				if(posY + farmer.getHeight()/2 < targetY)
+					GameFrame.moveFarmer("S", posX, posY);
+				if(posY + farmer.getHeight()/2 > targetY)
+					GameFrame.moveFarmer("N", posX, posY);
+			}
+			if((posX - precision <= targetX) && (targetX <= posX + precision)) {
+				if ((posY - precision <= targetY ) && (targetY <= posY + precision)) {
+					setFarmerOn(false);
+				}
 			}
 		}
+		incrementsRessources(GameFrame.raw);
+		GameFrame.raw++;
+	}
+	
+	public static void incrementsRessources(int raw) {
+		if(GameFrame.raw%10 == 0) {
+			for (Entry<String, Animal> e : DataObjects.Animals.entrySet()) {
+				((Animal) e).incrementAge();
+			}
+		}
+//		if(GameFrame.raw%)
 	}
 	
 	public FarmInitializer getFarmInitializer() {
@@ -396,7 +352,7 @@ public class GameFrame {
 	public class OpenGarageAction implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
-			GameFrame.this.garagrInfo = new GarageInfo();
+			GameFrame.this.garageInfo = new GarageInfo();
 		}
 	}
 	
