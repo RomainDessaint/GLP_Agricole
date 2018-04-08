@@ -107,8 +107,6 @@ public class ShopFrame {
 		frame.setVisible(true);
 		displayArticle(pnlInfrastructures, "Réserve", DataInfrastructure.getReservePrice(), DataObjects.infraBuy, "infrastructure", DataInfrastructure.getReserveGender());
 		displayArticle(pnlInfrastructures, "Silo", DataInfrastructure.getSiloPrice(), DataObjects.infraBuy, "infrastructure", DataInfrastructure.getSiloGender());
-		displayArticle(pnlInfrastructures, "Garage", DataInfrastructure.getGaragePrice(), DataObjects.infraBuy, "infrastructure", DataInfrastructure.getGarageGender());
-		displayArticle(pnlInfrastructures, "Camion", DataInfrastructure.getTruckPrice(), DataObjects.infraBuy, "infrastructure", DataInfrastructure.getTruckGender());
 		displayArticle(pnlInfrastructures, "Champ", DataInfrastructure.getFieldPrice(), DataObjects.infraBuy, "Champs", DataInfrastructure.getFieldGender());
 		displayArticle(pnlInfrastructures, "Enclos", DataInfrastructure.getEnclosurePrice(), DataObjects.infraBuy, "Enclos", DataInfrastructure.getEnclosureGender());
 		
