@@ -28,7 +28,6 @@ import types.Ressource;
 public class ShopPanel {
 	ImageIcon imageArticle;
 	
-	
 	JButton btnLess = new JButton("-");
 	JButton btnPlus = new JButton("+");
 	JButton btnBuy = new JButton("Acheter");
@@ -157,25 +156,25 @@ public class ShopPanel {
 		int indexFence = 0;
 		int indexCellule = 0;
 		while (DataObjects.Field.get(indexFence).isVisible()) {
-				if(indexCellule<9) {
-					if (isCelluleEmpty2( indexFence, indexCellule)) {
-						indexCellule++;
-					}
-					else if(indexCellule<=8) {	
-						DataObjects.Ressources.put(name+DataObjects.Ressources.size(), switchVedgetable(Name));
-						DataObjects.FieldMap.get(indexFence).get(indexCellule).setIcon(new ImageIcon("src\\images\\"+Name+".png"));
-						DataObjects.FieldMap.get(indexFence).get(indexCellule).addActionListener(new AnimalInfoAction(animals.get((name+(animals.size()-1))), indexFence, indexCellule));
+			if(indexCellule<9) {
+				if (isCelluleEmpty2( indexFence, indexCellule)) {
+					indexCellule++;
+				}
+				else if(indexCellule<=8) {	
+					DataObjects.Ressources.put(name+DataObjects.Ressources.size(), switchVedgetable(Name));
+					DataObjects.FieldMap.get(indexFence).get(indexCellule).setIcon(new ImageIcon("src\\images\\"+Name+".png"));
+					DataObjects.FieldMap.get(indexFence).get(indexCellule).addActionListener(new AnimalInfoAction(animals.get((name+(animals.size()-1))), indexFence, indexCellule));
 
-						break;
-					}	
-				}
-				
-				else {
-					indexFence++;
-					indexCellule =0;
-					
-				}
+					break;
+				}	
 			}
+			
+			else {
+				indexFence++;
+				indexCellule =0;
+				
+			}
+		}
 	}
 	
 	public void buyAnimal(String Name) {

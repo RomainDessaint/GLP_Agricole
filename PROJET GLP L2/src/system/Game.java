@@ -7,7 +7,7 @@ import types.Infrastructure;
 public class Game {
 	private String gameName;
 	private int difficulty;
-	private HashMap<String, Player> players;
+	private Player player;
 	private HashMap<String, Infrastructure> infrastructures;
 	private Shop shop;
 	private int money;
@@ -16,11 +16,11 @@ public class Game {
 	public Game() {
 	}
 
-	public Game(String gameName, int difficulty, HashMap<String, Player> players,
+	public Game(String gameName, int difficulty, Player player,
 			HashMap<String, Infrastructure> infrastructures, Shop shop, int money, int evenState) {
 		this.gameName = gameName;
 		this.difficulty = difficulty;
-		this.players = players;
+		this.player = player;
 		this.infrastructures = infrastructures;
 		this.shop = shop;
 		this.money = money;
@@ -42,12 +42,12 @@ public class Game {
 		this.difficulty = difficulty;
 	}
 
-	public HashMap<String, Player> getPlayers() {
-		return players;
+	public Player getPlayer() {
+		return player;
 	}
 
-	public void setPlayers(HashMap<String, Player> players) {
-		this.players = players;
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
 	public HashMap<String, Infrastructure> getInfrastructures() {
@@ -58,14 +58,6 @@ public class Game {
 		this.infrastructures = infrastructures;
 	}
 	
-	public void addPlayer(Player player) {
-		players.put(player.getName(), player);
-	}
-	
-	public void removePlayer(Player player) {
-		players.remove(player.getName());
-	}
-
 	public int getMoney() {
 		return money;
 	}
@@ -92,7 +84,7 @@ public class Game {
 
 	@Override
 	public String toString() {
-		return "Game [gameName=" + gameName + ", difficulty=" + difficulty + ", players=" + players
+		return "Game [gameName=" + gameName + ", difficulty=" + difficulty + ", player=" + player
 				+ ", infrastructures=" + infrastructures + ", shop=" + shop + ", money=" + money + ", eventState="
 				+ eventState + "]";
 	}

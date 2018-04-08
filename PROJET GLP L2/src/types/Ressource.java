@@ -1,9 +1,12 @@
 package types;
 
+import ressources.Wheat;
+
 public abstract class Ressource {
 	private int age = 0;
 	private int perishability = 0;
 	private String name;
+	private int weight = 0;
 
 	public Ressource(String name) {
 		this.name = name;
@@ -26,5 +29,8 @@ public abstract class Ressource {
 	}
 	public String getName() {
 		return name;
+	}
+	public int getWeight() {
+		return weight;
 	}
 }

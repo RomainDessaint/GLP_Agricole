@@ -118,6 +118,7 @@ public class GameFrame {
 		
 		farmer = initButton("src\\images\\linkright.png", animePanel);
 		farmer.setBounds(100, 400, 50, 50);
+		farmer.addActionListener(new FarmerAction());
 		pnlDb.add(animePanel);
 		
 		farmInitializer = new FarmInitializer(pnlDb, frame.getWidth(), frame.getHeight());
@@ -372,21 +373,27 @@ public class GameFrame {
 	public class OpenHouseAction implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
-			GameFrame.this.houseInfo = new HouseInfo();
+			new HouseInfo();
 		}
 	}
 	
 	public class OpenMarketAction implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
-			GameFrame.this.marketFrame = new MarketFrame();
+			new MarketFrame();
+		}
+	}
+	
+	public class FarmerAction implements ActionListener {
+
+		public void actionPerformed(ActionEvent arg0) {
+			new FarmerInfo();
 		}
 	}
 	
 	public class ClickAction implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("HOUSE");
 		    ImageIcon img = new ImageIcon("images/attention.png");
 		    JOptionPane.showMessageDialog(null, "Vous avez cliqué sur la maison", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 		}

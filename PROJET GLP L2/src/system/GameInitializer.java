@@ -20,11 +20,6 @@ public class GameInitializer {
 		Shop shop = new Shop();
 		return shop;
 	}
-
-	public static HashMap<String, Player> initPlayers() {
-		HashMap<String, Player> players = new HashMap<String, Player>();
-		return players;
-	}
 	
 	public void loadGame() {
 	}

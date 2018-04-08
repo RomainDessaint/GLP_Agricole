@@ -181,8 +181,7 @@ public class NewPlayerFrame {
 			player.setName(tfName.getText());
 			player.setAge(jcAge.getSelectedIndex()+10);
 			player.setGender(jcGender.getSelectedItem().toString());
-			NewPlayerFrame.this.getGame().addPlayer(player);
-//			NewPlayerFrame.this.setVisible(false);
+			NewPlayerFrame.this.getGame().setPlayer(player);
 			frame.setVisible(false);
 			NewPlayerFrame.this.gameFrame = new GameFrame(NewPlayerFrame.this.getGame());
 			
