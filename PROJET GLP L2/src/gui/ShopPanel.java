@@ -165,7 +165,6 @@ public class ShopPanel {
 					DataObjects.Ressources.put(name+DataObjects.Ressources.size(), switchVedgetable(Name));
 					DataObjects.FieldMap.get(indexFence).get(indexCellule).setIcon(new ImageIcon("src\\images\\"+Name+".png"));
 					DataObjects.FieldMap.get(indexFence).get(indexCellule).addActionListener(new AnimalInfoAction(animals.get((name+(animals.size()-1))), indexFence, indexCellule));
-
 					break;
 				}	
 			}
@@ -218,7 +217,6 @@ public class ShopPanel {
 		private Animal animal;
 		private int indexFence;
 		private int indexCellule;
-		private int d;
 		public AnimalInfoAction(Animal animal, int indexFence, int indexCellule) {
 			this.animal = animal;
 			this.indexFence = indexFence;
@@ -229,11 +227,11 @@ public class ShopPanel {
 			animalInfo(animal, indexFence, indexCellule);
 			GameFrame.setFarmerOn(true);
 			if (indexFence%2 == 0) {
-				GameFrame.setTargetX((int)DataObjects.FenceMap.get(indexFence).get(indexCellule).getLocation().getX() + indexFence*100+5);
+				GameFrame.setTargetX((int)DataObjects.FenceMap.get(indexFence).get(indexCellule).getLocation().getX() + indexFence*100+10);
 				GameFrame.setTargetY(200);
 			}
 			else if(indexFence%2 != 0){
-				GameFrame.setTargetX((int)DataObjects.FenceMap.get(indexFence).get(indexCellule).getLocation().getX() + indexFence*100+5);
+				GameFrame.setTargetX((int)DataObjects.FenceMap.get(indexFence).get(indexCellule).getLocation().getX() + indexFence*100+10);
 				GameFrame.setTargetY(380);
 			}
 		}
@@ -440,9 +438,7 @@ public class ShopPanel {
 				for (int i=0; i<getQuantity(); i++) {
 					buyFence();
 				}
-			}
-			
-			
+			}	
 		}
 	}
 

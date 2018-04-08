@@ -160,13 +160,12 @@ public class NewGameFrame {
 	}
 	
 	public class NextAction implements ActionListener {
-
 		public void actionPerformed(ActionEvent e) {
 			Game game = GameInitializer.newGame();
 			game.setGameName(tfGameName.getText());
 			game.setDifficulty(jcDifficulty.getSelectedIndex());
 			game.setShop(GameInitializer.newShop());
-			game.setMoney(DataGame.getStartingMoney(game.getDifficulty()));
+			game.setMoney((4-jcDifficulty.getSelectedIndex())*1000);
 			game.setEventState(-1);
 			frame.setVisible(false);
 			NewGameFrame.this.newPlayerFrame = new NewPlayerFrame(NewGameFrame.this, game);
@@ -174,11 +173,9 @@ public class NewGameFrame {
 	}
 	
 	public class BackMenuAction implements ActionListener {
-
 		public void actionPerformed(ActionEvent e) {
 			frame.setVisible(false);
 			new NewGameFrame(menuFrame);
-//			NewGameFrame.this.menuFrame.setVisible(true);
 		}
 	}
 }

@@ -123,8 +123,6 @@ public class ShopFrame {
 		displayArticle(pnlAnimals, "Cochon", DataAnimal.getPigPrice(), DataObjects.animalBuy, "animal", DataAnimal.getPigGender());
 		displayArticle(pnlAnimals, "Lapin", DataAnimal.getRabbitPrice(), DataObjects.animalBuy, "animal", DataAnimal.getRabbitGender());
 		displayArticle(pnlAnimals, "Chèvre", DataAnimal.getGoatPrice(), DataObjects.animalBuy, "animal", DataAnimal.getGoatGender());
-		
-		
 	}
 	
 	public void buyAnimal(JButton btnShopAnimal) {
