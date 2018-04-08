@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,6 +21,8 @@ public class FarmerInfo {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.setBackground(new Color(100, 100, 100));
+		
+		pnlMain.setLayout(new GridLayout(3,1));
 		
 		JLabel lblName = new JLabel("Nom : " +player.getName());
 		JLabel lblAge = new JLabel("Age : " +player.getAge());

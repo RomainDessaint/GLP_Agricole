@@ -215,13 +215,13 @@ public class GameFrame {
 	public static int getTargetX() {
 		return targetX;
 	}
-	public void setTargetX(int targetX) {
+	public static void setTargetX(int targetX) {
 		GameFrame.targetX = targetX;
 	}
 	public static int getTargetY() {
 		return targetY;
 	}
-	public void setTargetY(int targetY) {
+	public static void setTargetY(int targetY) {
 		GameFrame.targetY = targetY;
 	}
 	public JPanel getDbPanel() {

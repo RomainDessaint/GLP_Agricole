@@ -39,7 +39,6 @@ public class AnimalInfo {
 		frame.add(action);
 		frame.setLayout(null);
 		action.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				DataObjects.FenceMap.get(indexFence).get(indexCellule).setIcon(null);

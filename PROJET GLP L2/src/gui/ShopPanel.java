@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -189,7 +190,6 @@ public class ShopPanel {
 						animals.put(name+animals.size(), switchAnimal(name));						
 						DataObjects.FenceMap.get(indexFence).get(indexCellule).setIcon(new ImageIcon("src\\images\\"+Name+".png"));
 						DataObjects.FenceMap.get(indexFence).get(indexCellule).addActionListener(new AnimalInfoAction(animals.get((name+(animals.size()-1))), indexFence, indexCellule));
-
 						break;
 					}	
 				}
@@ -201,6 +201,7 @@ public class ShopPanel {
 				}
 			}
 	}
+	
 	public class AddInfrastructures implements ActionListener{
 		String name;
 		public AddInfrastructures(String name) {
@@ -212,10 +213,12 @@ public class ShopPanel {
 			
 		}
 	}
+	
 	public class AnimalInfoAction implements ActionListener{
 		private Animal animal;
 		private int indexFence;
 		private int indexCellule;
+		private int d;
 		public AnimalInfoAction(Animal animal, int indexFence, int indexCellule) {
 			this.animal = animal;
 			this.indexFence = indexFence;
@@ -224,6 +227,15 @@ public class ShopPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			animalInfo(animal, indexFence, indexCellule);
+			GameFrame.setFarmerOn(true);
+			if (indexFence%2 == 0) {
+				GameFrame.setTargetX((int)DataObjects.FenceMap.get(indexFence).get(indexCellule).getLocation().getX() + indexFence*100+5);
+				GameFrame.setTargetY(200);
+			}
+			else if(indexFence%2 != 0){
+				GameFrame.setTargetX((int)DataObjects.FenceMap.get(indexFence).get(indexCellule).getLocation().getX() + indexFence*100+5);
+				GameFrame.setTargetY(380);
+			}
 		}
 	}
 	
@@ -358,7 +370,7 @@ public class ShopPanel {
 				if (shopPanel.getQuantity() == 0) {
 					JOptionPane jop1 = new JOptionPane();
 				    ImageIcon img = new ImageIcon("src\\images\\attention.png");
-				    jop1.showMessageDialog(null, "Veuillez sélectionner une quantité", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+				    JOptionPane.showMessageDialog(null, "Veuillez sélectionner une quantité", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 				}
 				else {
 					GameFrame.game.setMoney(money-(shopPanel.getQuantity()*price));
@@ -366,9 +378,9 @@ public class ShopPanel {
 					JOptionPane jop2 = new JOptionPane();
 				    ImageIcon img = new ImageIcon("src\\images\\Ok.png");
 				    if (shopPanel.getQuantity() == 1)
-				    	jop2.showMessageDialog(null,shopPanel.getQuantity()+" " +shopPanel.getName() +" " +"acheté"+gender+" avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+				    	JOptionPane.showMessageDialog(null,shopPanel.getQuantity()+" " +shopPanel.getName() +" " +"acheté"+gender+" avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 				    else {
-				    	jop2.showMessageDialog(null,shopPanel.getQuantity()+" " +shopPanel.getName() +"s " +"acheté"+gender+"s avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+				    	JOptionPane.showMessageDialog(null,shopPanel.getQuantity()+" " +shopPanel.getName() +"s " +"acheté"+gender+"s avec succès", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 				    }
 				    shopPanel.setQuantity(0);
 				}
@@ -376,7 +388,7 @@ public class ShopPanel {
 			else {
 				JOptionPane jop2 = new JOptionPane();
 			    ImageIcon img = new ImageIcon("src\\images\\attention.png");
-			    jop2.showMessageDialog(null, "Argent insuffisant", "Information", JOptionPane.INFORMATION_MESSAGE, img);
+			    JOptionPane.showMessageDialog(null, "Argent insuffisant", "Information", JOptionPane.INFORMATION_MESSAGE, img);
 			}
 		}
 	}
@@ -390,6 +402,7 @@ public class ShopPanel {
 			DataObjects.FenceMap.get(0).get(index).setIcon(btnShopAnimal.getIcon());
 		}
 	}
+	
 	public void buyField() {
 		int index = 0;
 		while(DataObjects.Field.get(index).isVisible()) {
@@ -409,29 +422,29 @@ public class ShopPanel {
 			DataObjects.Fence.get(index).setVisible(true);
 		}
 	}
-public class AddFieldAction implements ActionListener {
-		
-		public void actionPerformed(ActionEvent e) {
-			if (getQuantity()>0) {
-				for (int i=0; i<getQuantity(); i++) {
-					buyField();
+	
+	public class AddFieldAction implements ActionListener {
+			
+			public void actionPerformed(ActionEvent e) {
+				if (getQuantity()>0) {
+					for (int i=0; i<getQuantity(); i++) {
+						buyField();
+					}
 				}
 			}
 		}
-	}
 
-public class AddFenceAction implements ActionListener {
-	public void actionPerformed(ActionEvent e) {
-		if (getQuantity()>0) {
-			for (int i=0; i<getQuantity(); i++) {
-				buyFence();
+	public class AddFenceAction implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (getQuantity()>0) {
+				for (int i=0; i<getQuantity(); i++) {
+					buyFence();
+				}
 			}
+			
+			
 		}
-		
-		
 	}
-}
-	
 
 	public JPanel getPanel() {
 		return panel;
