@@ -3,7 +3,7 @@ import types.Ressource;
 
 public class Tomato extends Ressource {
 	
-	public Tomato(int age, int perishability) {
-		super(age, perishability);
+	public Tomato(String name) {
+		super(name);
 	}
 }

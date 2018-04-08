@@ -17,7 +17,13 @@ import animals.Pig;
 import animals.Rabbit;
 import animals.Sheep;
 import datas.DataObjects;
+import gui.MenuFrame.NewGameAction;
+import ressources.Carrot;
+import ressources.Sunflower;
+import ressources.Tomato;
+import ressources.Wheat;
 import types.Animal;
+import types.Ressource;
 
 public class ShopPanel {
 	ImageIcon imageArticle;
@@ -78,54 +84,67 @@ public class ShopPanel {
 			});
 		}
 		else if (action == "ressources") {
-			btnBuy.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if (!DataObjects.vedgetables.containsKey(name)) {
-						
-						if (DataObjects.CurrentKgHouseVedgs<DataObjects.MaxKgHouseVegds) {
-							DataObjects.vedgetables.put(name, 1);
-							DataObjects.vedgetablesHouse.put(name, 1);
-							for (int i=1; i<getQuantity();i++) {
-								DataObjects.vedgetables.put(name, DataObjects.vedgetables.get(name)+1);
-								DataObjects.vedgetablesHouse.put(name, DataObjects.vedgetablesHouse.get(name)+1);
-							}
-						}
-						else {
-							DataObjects.vedgetables.put(name, 1);
-							DataObjects.vedgetablesSilo.put(name, 1);
-							for (int i=1;i<getQuantity();i++) {
-								DataObjects.vedgetables.put(name, DataObjects.vedgetables.get(name)+1);
-								DataObjects.vedgetablesSilo.put(name, DataObjects.vedgetablesSilo.get(name)+1);
-							}
-						}
-					}
-					else {
-						if(DataObjects.CurrentKgHouseVedgs<DataObjects.MaxKgHouseVegds) {
-							for (int i=0; i<getQuantity();i++) {
-								DataObjects.vedgetables.put(name, DataObjects.vedgetables.get(name)+1);
-								DataObjects.vedgetablesHouse.put(name, DataObjects.vedgetablesHouse.get(name)+1);
-							}
-							
-						}
-						else {
-							for (int i=0; i<getQuantity();i++) {
-								DataObjects.vedgetables.put(name, DataObjects.vedgetables.get(name)+1);
-								DataObjects.vedgetablesSilo.put(name, DataObjects.vedgetablesSilo.get(name)+1);
-							}
-							
-							
-						}
-						
-					}
-					
+		btnBuy.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				for (int i=0; i< getQuantity(); i++) {
+					buyVedgetable(name);
 				}
-			});
+			}
+		});
+			
 		}
+//			btnBuy.addActionListener(new ActionListener() {
+//				
+//				@Override
+//				public void actionPerformed(ActionEvent e) {
+//					if (!DataObjects.vedgetables.containsKey(name)) {
+//						
+//						if (DataObjects.CurrentKgHouseVedgs<DataObjects.MaxKgHouseVegds) {
+//							DataObjects.vedgetables.put(name, 1);
+//							DataObjects.vedgetablesHouse.put(name, 1);
+//							for (int i=1; i<getQuantity();i++) {
+//								DataObjects.vedgetables.put(name, DataObjects.vedgetables.get(name)+1);
+//								DataObjects.vedgetablesHouse.put(name, DataObjects.vedgetablesHouse.get(name)+1);
+//							}
+//						}
+//						else {
+//							DataObjects.vedgetables.put(name, 1);
+//							DataObjects.vedgetablesSilo.put(name, 1);
+//							for (int i=1;i<getQuantity();i++) {
+//								DataObjects.vedgetables.put(name, DataObjects.vedgetables.get(name)+1);
+//								DataObjects.vedgetablesSilo.put(name, DataObjects.vedgetablesSilo.get(name)+1);
+//							}
+//						}
+//					}
+//					else {
+//						if(DataObjects.CurrentKgHouseVedgs<DataObjects.MaxKgHouseVegds) {
+//							for (int i=0; i<getQuantity();i++) {
+//								DataObjects.vedgetables.put(name, DataObjects.vedgetables.get(name)+1);
+//								DataObjects.vedgetablesHouse.put(name, DataObjects.vedgetablesHouse.get(name)+1);
+//							}
+//							
+//						}
+//						else {
+//							for (int i=0; i<getQuantity();i++) {
+//								DataObjects.vedgetables.put(name, DataObjects.vedgetables.get(name)+1);
+//								DataObjects.vedgetablesSilo.put(name, DataObjects.vedgetablesSilo.get(name)+1);
+//							}
+//							
+//							
+//						}
+//						
+//					}
+//					
+//				}
+//			});
+//		}
 		else if (action == "Enclos") {
-			System.out.println("dans ajouter action fence");
 			btnBuy.addActionListener(new AddFenceAction());
+		}
+		else if (action == "Champs") {
+			btnBuy.addActionListener(new AddFieldAction());
 		}
 		else if (action == "infrastructure") {
 			btnBuy.addActionListener(new AddInfrastructures(name));
@@ -133,8 +152,32 @@ public class ShopPanel {
 		hashButton.put(name, btnBuy);
 		
 	}
-		
+	
+	public void buyVedgetable(String Name) {
+		int indexFence = 0;
+		int indexCellule = 0;
+		while (DataObjects.Field.get(indexFence).isVisible()) {
+				if(indexCellule<9) {
+					if (isCelluleEmpty2( indexFence, indexCellule)) {
+						indexCellule++;
+					}
+					else if(indexCellule<=8) {	
+						DataObjects.Ressources.put(name+DataObjects.Ressources.size(), switchVedgetable(Name));
+						DataObjects.FieldMap.get(indexFence).get(indexCellule).setIcon(new ImageIcon("src\\images\\"+Name+".png"));
+						DataObjects.FieldMap.get(indexFence).get(indexCellule).addActionListener(new AnimalInfoAction(animals.get((name+(animals.size()-1))), indexFence, indexCellule));
 
+						break;
+					}	
+				}
+				
+				else {
+					indexFence++;
+					indexCellule =0;
+					
+				}
+			}
+	}
+	
 	public void buyAnimal(String Name) {
 		int indexFence = 0;
 		int indexCellule = 0;
@@ -201,6 +244,20 @@ public class ShopPanel {
 				return null;
 		}
 	}
+	public Ressource switchVedgetable(String name) { 
+		switch(name) {
+		case "Carotte": 
+			return (new Carrot(name+animals.size()));
+		case "Tournesol" : 
+			return (new Sunflower(name+animals.size()));
+		case "Tomattes" : 
+			return (new Tomato(name+animals.size()));
+		case "Blé" : 
+			return (new Wheat(name+animals.size()));
+			default : 
+				return null;
+		}
+	}
 	public String getGender() {
 		return gender;
 	}
@@ -209,6 +266,9 @@ public class ShopPanel {
 	}
 	public boolean isCelluleEmpty( int indexFence, int indexCellule) {
 		return (DataObjects.FenceMap.get(indexFence).get(indexCellule).getIcon()!= null);
+	}
+	public boolean isCelluleEmpty2( int indexFence, int indexCellule) {
+		return (DataObjects.FieldMap.get(indexFence).get(indexCellule).getIcon()!= null);
 	}
 	public int getQuantity() {
 		return quantity;
@@ -343,7 +403,6 @@ public class ShopPanel {
 	
 	public void buyFence() {
 		int index = 0;
-		System.out.println("dans buyfence");
 		while(DataObjects.Fence.get(index).isVisible()) {
 			index++;
 		}
@@ -354,7 +413,11 @@ public class ShopPanel {
 public class AddFieldAction implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
-			buyField();
+			if (getQuantity()>0) {
+				for (int i=0; i<getQuantity(); i++) {
+					buyField();
+				}
+			}
 		}
 	}
 
@@ -362,7 +425,6 @@ public class AddFenceAction implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (getQuantity()>0) {
 			for (int i=0; i<getQuantity(); i++) {
-				System.out.println("dans Addfence Action");
 				buyFence();
 			}
 		}

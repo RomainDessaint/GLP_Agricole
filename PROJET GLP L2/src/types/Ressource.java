@@ -1,12 +1,12 @@
 package types;
 
 public abstract class Ressource {
-	private int age;
-	private int perishability;
+	private int age = 0;
+	private int perishability = 0;
+	private String name;
 
-	public Ressource(int age, int perishability) {
-		this.age = age;
-		this.perishability = perishability;
+	public Ressource(String name) {
+		this.name = name;
 	}
 
 	public int getAge() {
@@ -23,5 +23,8 @@ public abstract class Ressource {
 
 	public void setPerishability(int perishability) {
 		this.perishability = perishability;
+	}
+	public String getName() {
+		return name;
 	}
 }
